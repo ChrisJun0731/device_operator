@@ -45,3 +45,13 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.class
+*.iml
+.idea/workspace.xml
+.idea/modules.xml
+.idea/libraries/Maven__log4j_log4j_1_2_12.xml
+.idea/misc.xml
+.idea/libraries/Maven__junit_junit_4_12.xml
+.idea/compiler.xml
+.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml
+.gitignore.bak
