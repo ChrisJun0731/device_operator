@@ -41,7 +41,7 @@ class Playlist {
 	/**
 	 * 创建播放列表文件
 	 */
-	public void createPlayListFile(){
+	public File createPlayListFile(){
 		String playlist_str = toPlayListString();
 		int i = 1;
 		String filename = "playlist"+ i +".lst";
@@ -61,6 +61,7 @@ class Playlist {
 		catch(Exception e){
 			e.printStackTrace();
 		}
+		return file;
 	}
 
 	public void addItem(Item item){

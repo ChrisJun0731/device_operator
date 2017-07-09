@@ -39,6 +39,11 @@ class Util {
 		crc[index+1] = (byte)(result/256);
 	}
 
+	/**
+	 * 还原转义后的数据流
+	 * @param data
+	 * @return
+	 */
 	public byte[] decompile(byte[] data){
 		Byte[] rec_data = new Byte[data.length];
 		for(int i=0; i<rec_data.length; i++){
@@ -69,6 +74,31 @@ class Util {
 		for(int i=0; i<result.length; i++){
 			result[i] = result_array[i];
 		}
+		return result;
+	}
+
+	/**
+	 * 将ip的字符串转换为byte数据
+	 * @param ip
+	 * @return
+	 */
+	public byte[] ip2byte(String ip){
+		String[] array = ip.split(".");
+		byte[] result = new byte[array.length];
+		for(int i=0; i<array.length; i++){
+			result[i] = Byte.parseByte(array[i]);
+		}
+		return result;
+	}
+
+	/**
+	 * 将byte数组转换为ip地址的字符串形式
+	 * @param ip
+	 * @return
+	 */
+	public String byte2ip(byte[] ip){
+		String result = mapByte2Int(ip[0])+ "."+ mapByte2Int(ip[1])+"."+ mapByte2Int(ip[2])+ "."
+				+ mapByte2Int(ip[3]);
 		return result;
 	}
 

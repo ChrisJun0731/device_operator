@@ -449,10 +449,11 @@ public class DeviceOperator {
     public void clearInvalidFiles(){
         clearFiles((byte)1);
     }
+
     /**
      * 清理文件
      */
-    public void clearFiles(byte type){
+    private void clearFiles(byte type){
         byte[] data_frame = dataFrame.createDataFrame(0x7c, type);
         this.tcpClient.send(data_frame);
         byte[] result = this.tcpClient.receive();
@@ -514,10 +515,151 @@ public class DeviceOperator {
     }
 
     /**
+     * 指定播放列表进行播放
+     * @param num 播放列表编号
+     */
+    public void PlayAssignedList(int num){
+        byte[] data_frame = dataFrame.createDataFrame(0x1b, (byte)num);
+        this.tcpClient.send(data_frame);
+        byte[] result = this.tcpClient.receive();
+        if(util.mapByte2Int(result[3])== 0x1c){
+            if(result[4] == 1){
+                logger.info("指定播放列表进行播放成功!");
+            }
+            else{
+                logger.error("指定播放列表播放失败!");
+            }
+        }
+    }
+
+    /**
+     * 设置屏体基本参数
+     * @param basicParam
+     */
+    public void setBasicParam(BasicParam basicParam){
+        byte[] data = convertBasicParam2Data(basicParam);
+        byte[] data_frame = dataFrame.createDataFrame(0x19, data);
+        this.tcpClient.send(data_frame);
+        byte[] result = this.tcpClient.receive();
+        if(result[3] == 0x1a){
+            if(result[4] == 1){
+                logger.info("设备基本参数设置成功!");
+            }
+            else{
+                logger.error("设备基本参数设置失败!");
+            }
+        }
+        else{
+            logger.error("设备无响应!");
+        }
+    }
+
+    /**
+     * 查询设备的基本参数
+     * @return
+     */
+    public BasicParam queryBasicParam(){
+        byte[] data_frame = dataFrame.createDataFrame(0x27, null);
+        this.tcpClient.send(data_frame);
+        byte[] result = this.tcpClient.receive();
+        BasicParam basicParam = new BasicParam();
+        if(result[3] == 0x28){
+            basicParam = convertData2BasicParam(result);
+        }
+        else{
+            logger.error("设备无响应！");
+        }
+        return basicParam;
+    }
+
+    /**
      * 关闭与设备连接的tcp连接
      */
     public void disconnect(){
         this.tcpClient.close();
+    }
+
+    /**
+     * 将basicParam对象转换为byte数组
+     * @param basicParam
+     * @return
+     */
+    private byte[] convertBasicParam2Data(BasicParam basicParam){
+        byte[] data = new byte[26];
+        byte reserve1 = 0;
+        byte[] reserve2 = new byte[2];
+
+        byte[] screen_num = new byte[2];
+        util.int2buf(Integer.parseInt(basicParam.getScreen_number()), screen_num, 0);
+        byte[] ip = util.ip2byte(basicParam.getIp());
+        byte[] port = new byte[2];
+        util.int2buf(Integer.parseInt(basicParam.getPort()), port, 0);
+        byte[] subnet_mask = util.ip2byte(basicParam.getSubnet_mask());
+        byte[] gateway = util.ip2byte(basicParam.getGateway());
+        byte[] upp_com_ip = util.ip2byte(basicParam.getUpp_com_ip());
+        byte report = Byte.parseByte(basicParam.getReport());
+
+        System.arraycopy(screen_num, 0, data, 0, 2);
+        System.arraycopy(ip, 0, data, 2, 4);
+        System.arraycopy(port, 0, data, 6, 2);
+        System.arraycopy(subnet_mask, 0, data, 8, 4);
+        System.arraycopy(gateway, 0, data, 12, 4);
+        System.arraycopy(upp_com_ip, 0, data, 16, 4);
+        System.arraycopy(reserve2, 0, data, 20, 2);
+        System.arraycopy(report, 0, data, 22, 1);
+        System.arraycopy(reserve1, 0, data, 23, 1);
+        System.arraycopy(reserve1, 0, data, 24, 1);
+        System.arraycopy(reserve1, 0, data, 25, 1);
+
+        return data;
+    }
+
+    /**
+     * 将byte数组转换为BasicParam对象
+     * @param data
+     * @return
+     */
+    private BasicParam convertData2BasicParam(byte[] data){
+        byte[] screen_num = new byte[2];
+        byte[] ip = new byte[4];
+        byte[] port = new byte[2];
+        byte[] subnet_mask = new byte[4];
+        byte[] gateway = new byte[4];
+        byte[] upp_com_ip = new byte[4];
+        byte report = 0;
+
+        screen_num[0] = data[5];
+        screen_num[1] = data[6];
+        ip[0] = data[7];
+        ip[1] = data[8];
+        ip[2] = data[9];
+        ip[3] = data[10];
+        port[0] = data[11];
+        port[1] = data[12];
+        subnet_mask[0] = data[13];
+        subnet_mask[1] = data[14];
+        subnet_mask[2] = data[15];
+        subnet_mask[3] = data[16];
+        gateway[0] = data[17];
+        gateway[1] = data[18];
+        gateway[2] = data[19];
+        gateway[3] = data[20];
+        upp_com_ip[0] = data[21];
+        upp_com_ip[1] = data[22];
+        upp_com_ip[2] = data[23];
+        upp_com_ip[3] = data[24];
+        report = data[27];
+
+        BasicParam basicParam = new BasicParam();
+        basicParam.setScreen_number(String.valueOf(util.buf2int(screen_num[0], screen_num[1])));
+        basicParam.setIp(util.byte2ip(ip));
+        basicParam.setPort(String.valueOf(util.buf2int(port[0], port[1])));
+        basicParam.setSubnet_mask(util.byte2ip(subnet_mask));
+        basicParam.setGateway(util.byte2ip(gateway));
+        basicParam.setUpp_com_ip(util.byte2ip(upp_com_ip));
+        basicParam.setReport(String.valueOf(report));
+
+        return basicParam;
     }
 
 }
