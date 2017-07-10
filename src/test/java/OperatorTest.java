@@ -1,4 +1,5 @@
 
+import com.genture.device_operator.BasicParam;
 import com.genture.device_operator.Device;
 import com.genture.device_operator.DeviceOperator;
 import org.junit.*;
@@ -97,6 +98,7 @@ public class OperatorTest {
 		deviceOperator.setLightByHand(100);
 	}
 
+	//二期新增jar包功能测试
 
 	@Test
 	public void captureScreenTest(){
@@ -104,14 +106,31 @@ public class OperatorTest {
 	}
 
 	@Test
-	public void convertByteDataTest(){
-		byte[] data= {(byte)0x23, (byte)0xaa, (byte)0x11, (byte)0xcc, (byte)0xee, (byte)0x35};
-//		byte[] convertData = dataFrame.convertByteData(data);
+	public void clearAllFilesTest(){
+		deviceOperator.clearAllFiles();
 	}
 
 	@Test
-	public void createDataFrameTest(){
-		byte[] data= {(byte)0x23, (byte)0xaa, (byte)0x11, (byte)0xcc, (byte)0xee, (byte)0x35};
-//		byte[] data_frame = dataFrame.createDataFrame(0x13, data);
+	public void clearInvalidFiles(){
+		deviceOperator.clearInvalidFiles();
 	}
+
+	@Test
+	public void playAssignedListTest(){
+		int assigned = 0;
+		deviceOperator.playAssignedList(assigned);
+	}
+
+	@Test
+	public void setBasicParamTest(){
+		BasicParam basicParam = new BasicParam();
+		deviceOperator.setBasicParam(basicParam);
+	}
+
+	@Test
+	public void queryBasicParamTest(){
+		BasicParam basicParam = new BasicParam();
+		basicParam = deviceOperator.queryBasicParam();
+	}
+
 }

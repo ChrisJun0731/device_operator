@@ -518,7 +518,7 @@ public class DeviceOperator {
      * 指定播放列表进行播放
      * @param num 播放列表编号
      */
-    public void PlayAssignedList(int num){
+    public void playAssignedList(int num){
         byte[] data_frame = dataFrame.createDataFrame(0x1b, (byte)num);
         this.tcpClient.send(data_frame);
         byte[] result = this.tcpClient.receive();
