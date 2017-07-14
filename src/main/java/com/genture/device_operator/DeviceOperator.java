@@ -3,6 +3,7 @@ package com.genture.device_operator;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -474,36 +475,34 @@ public class DeviceOperator {
      * 获取屏幕截图
      */
     public void captureScreen(){
-        String path = "E:\\capture";
-        String filename = new Date().toString();
-        String suffix = ".bmp";
-        File file = new File(path+filename+suffix);
+        File file = util.createTempFile();
         FileOutputStream fos = null;
-        if(!file.exists()){
-            try{
-                file.createNewFile();
-                fos = new FileOutputStream(file, true);
-            }
-            catch(Exception e){
-                logger.error(e.getMessage());
-            }
+        try{
+            fos = new FileOutputStream(file);
         }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
         int pack_size = 5*1024;
         byte[] pack_size_buf = new byte[2];
         util.int2buf(pack_size, pack_size_buf, 0);
         byte[] send_data = dataFrame.createDataFrame(0x80, pack_size_buf);
         this.tcpClient.send(send_data);
+
         while(true){
             byte[] rec_data = this.tcpClient.receive();
             byte[] rec_trans_data = util.decompile(rec_data);
             try{
-                fos.write(rec_trans_data, 4, rec_trans_data.length-7);
+                fos.write(rec_trans_data, 6, rec_trans_data.length-7);
             }
             catch(Exception e){
                 logger.error(e.getMessage());
             }
+
             if(rec_trans_data.length < pack_size + 7){
                 try{
+                    fos.flush();
                     fos.close();
                 }
                 catch(Exception e){
@@ -628,27 +627,27 @@ public class DeviceOperator {
         byte[] upp_com_ip = new byte[4];
         byte report = 0;
 
-        screen_num[0] = data[5];
-        screen_num[1] = data[6];
-        ip[0] = data[7];
-        ip[1] = data[8];
-        ip[2] = data[9];
-        ip[3] = data[10];
-        port[0] = data[11];
-        port[1] = data[12];
-        subnet_mask[0] = data[13];
-        subnet_mask[1] = data[14];
-        subnet_mask[2] = data[15];
-        subnet_mask[3] = data[16];
-        gateway[0] = data[17];
-        gateway[1] = data[18];
-        gateway[2] = data[19];
-        gateway[3] = data[20];
-        upp_com_ip[0] = data[21];
-        upp_com_ip[1] = data[22];
-        upp_com_ip[2] = data[23];
-        upp_com_ip[3] = data[24];
-        report = data[27];
+        screen_num[0] = data[4];
+        screen_num[1] = data[5];
+        ip[0] = data[6];
+        ip[1] = data[7];
+        ip[2] = data[8];
+        ip[3] = data[9];
+        port[0] = data[10];
+        port[1] = data[11];
+        subnet_mask[0] = data[12];
+        subnet_mask[1] = data[13];
+        subnet_mask[2] = data[14];
+        subnet_mask[3] = data[15];
+        gateway[0] = data[16];
+        gateway[1] = data[17];
+        gateway[2] = data[18];
+        gateway[3] = data[19];
+        upp_com_ip[0] = data[20];
+        upp_com_ip[1] = data[21];
+        upp_com_ip[2] = data[22];
+        upp_com_ip[3] = data[23];
+        report = data[26];
 
         BasicParam basicParam = new BasicParam();
         basicParam.setScreen_number(String.valueOf(util.buf2int(screen_num[0], screen_num[1])));

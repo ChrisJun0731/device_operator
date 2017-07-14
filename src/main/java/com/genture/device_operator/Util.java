@@ -1,12 +1,21 @@
 package com.genture.device_operator;
 
+import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * Created by zhuj@genture.com on 2017/6/15.
  */
 class Util {
+
+	private static Logger logger = Logger.getLogger(Util.class);
+
 	/**
 	 * 将一个按buf存储的整数转化为int
 	 * @param low
@@ -49,7 +58,8 @@ class Util {
 		for(int i=0; i<rec_data.length; i++){
 			rec_data[i] = data[i];
 		}
-		List<Byte> rec_data_list = Arrays.asList(rec_data);
+		List<Byte> list = Arrays.asList(rec_data);
+		List<Byte> rec_data_list = new ArrayList(list);
 		for(int i=0; i<rec_data_list.size(); i++){
 			if(mapByte2Int(rec_data_list.get(i))== 0xee){
 				if(mapByte2Int(rec_data_list.get(i+1))== 0x0a){
@@ -102,4 +112,29 @@ class Util {
 		return result;
 	}
 
+	/**
+	 * 创建临时文件，用来写入截屏图片流
+	 */
+	public File createTempFile(){
+		String path = "E:/capture";
+		File directory = new File(path);
+		if(!directory.exists()){
+			directory.mkdir();
+		}
+		String filename = "";
+		filename = Calendar.YEAR + "" + Calendar.MONTH + "" + Calendar.DAY_OF_MONTH + ""
+				+ Calendar.HOUR  + "" + Calendar.MINUTE + "" + Calendar.SECOND
+				+ "" + Calendar.MILLISECOND;
+		String suffix = ".bmp";
+		File file = new File(directory,filename+suffix);
+		if(!file.exists()){
+			try{
+				file.createNewFile();
+			}
+			catch(Exception e){
+				logger.error(e.getMessage());
+			}
+		}
+		return file;
+	}
 }
