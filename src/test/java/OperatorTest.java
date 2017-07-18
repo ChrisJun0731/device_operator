@@ -1,23 +1,25 @@
 
-import com.genture.device_operator.BasicParam;
-import com.genture.device_operator.Device;
-import com.genture.device_operator.DeviceOperator;
+import com.genture.device_operator.*;
 import org.junit.*;
 import org.junit.Test;
+
+import java.io.File;
 
 /**
  * Created by Administrator on 2017/6/13.
  */
 public class OperatorTest {
 	private DeviceOperator deviceOperator;
-//	private DataFrame dataFrame;
-
 	@Before
 	public void setUp(){
-//		genture.com.com.genture.device_operator.Device device = new genture.com.com.genture.device_operator.Device("192.168.30.123", 5000);
-		Device device = new Device("10.100.15.15", 5000);
+//		Device device = new Device("10.100.15.15", 5000);
+//		Device device = new Device("192.168.0.220", 5000);
+//		Device device = new Device("192.168.0.1", 5000);
+//		Device device = new Device("192.168.50.225", 5000);
+//		Device device = new Device("192.168.30.123",5000);
+//		Device device = new Device("172.16.1.214", 5000);
+		Device device = new Device("192.168.50.2", 5000);
 		this.deviceOperator = new DeviceOperator(device);
-//		this.dataFrame = new DataFrame();
 	}
 
 	@Test
@@ -26,7 +28,7 @@ public class OperatorTest {
 	}
 
 	@Test
-	public void closeScreenTest(){
+	public void closeSreenTest(){
 		this.deviceOperator.closeScreen();
 	}
 
@@ -84,8 +86,9 @@ public class OperatorTest {
 	@Test
 	public void sendFileTest(){
 //		String filePath = "C:\\Users\\Administrator\\Desktop\\新建文本文档.lst";
-		String filePath = "C:\\Users\\Administrator\\Desktop\\诺瓦交通协议标准版 V3.2.0\\金晓交通通信协议.doc";
+//		String filePath = "C:\\Users\\Administrator\\Desktop\\诺瓦交通协议标准版 V3.2.0\\金晓交通通信协议.doc";
 //		String filePath = "C:\\Users\\Administrator\\Desktop\\诺瓦交通协议标准版 V3.2.0\\jar包接口测试用例.doc";
+		String filePath = "F:\\pics\\cf.wmv2";
 		deviceOperator.sendFile(filePath);
 	}
 
@@ -117,13 +120,15 @@ public class OperatorTest {
 
 	@Test
 	public void playAssignedListTest(){
-		int assigned = 0;
+		int assigned = 5;
 		deviceOperator.playAssignedList(assigned);
 	}
 
 	@Test
 	public void setBasicParamTest(){
 		BasicParam basicParam = new BasicParam();
+		basicParam.setIp("192.168.50.2");
+//		basicParam.setSubnet_mask("255.255.255.0");
 		deviceOperator.setBasicParam(basicParam);
 	}
 
@@ -131,6 +136,90 @@ public class OperatorTest {
 	public void queryBasicParamTest(){
 		BasicParam basicParam = new BasicParam();
 		basicParam = deviceOperator.queryBasicParam();
+	}
+
+	@Test
+	public void createPlaylistTest(){
+		Txt txt = new Txt();
+		txt.setX(0);
+		txt.setY(0);
+		txt.setFont(1);
+		txt.setFont_size(1616);
+		txt.setForeground_color(2);
+		txt.setBackground_color(8);
+		txt.setTwinkle(0);
+		txt.setContent("省略属性测试");
+		txt.setWidth(0);
+		txt.setHeight(0);
+		txt.setFont_style(1);
+		txt.setChar_space(0);
+		txt.setQueue_mode(0);
+
+		Img img = new Img();
+		img.setX(0);
+		img.setY(0);
+		img.setWidth(0);
+		img.setHeight(0);
+		img.setStayTime(10);
+		img.setTwinkle(0);
+		img.setFilename("timg.jpg");
+
+		Timer timer = new Timer();
+
+
+		Txtext txtext = new Txtext();
+		txtext.setFile_content("测试txtext");
+
+		Video video = new Video();
+		video.setFilename("1.avi");
+
+		Gif gif = new Gif();
+		gif.setX(0);
+		gif.setY(0);
+		gif.setHeight(0);
+		gif.setWidth(0);
+		gif.setBackground_color(8);
+		gif.setPlay_count(3);
+		gif.setPlay_time(100);
+		gif.setFilename("huluwa.gif");
+
+
+		Item item1 = new Item();
+		item1.setStayTime(100);
+		item1.setInStyle(1);
+		item1.setOutStyle(1);
+		item1.setInSpeed(1);
+		item1.setTwinkle_speed(0);
+		item1.setTwinkle_count(5);
+
+		item1.setPlay_count(1);
+
+//		item1.addTxt(txt);
+//		item1.addTimer(timer);
+		item1.addGif(gif);
+//		item1.addImg(img);
+//		item1.addVideo(video);
+//
+//		Item item2 = new Item();
+//		item2.addTxt(txt);
+//		item2.addTimer(timer);
+//		item2.addGif(gif);
+
+
+		Playlist playlist = new Playlist();
+		playlist.addItem(item1);
+//		playlist.addItem(item2);
+
+		File file = playlist.createPlayListFile();
+//		System.out.println(file.getPath());
+//
+//		System.out.println(file.getAbsolutePath());
+		deviceOperator.sendFile(file.getPath());
+		String filename = file.getName();
+		String num = filename.substring(4,7);
+		deviceOperator.playAssignedList(Integer.parseInt(num));
+		deviceOperator.disconnect();
+
 	}
 
 }
