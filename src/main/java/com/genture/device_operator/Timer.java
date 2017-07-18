@@ -1,11 +1,8 @@
 package com.genture.device_operator;
-/***********************************************************************
- * Module:  Timer.java
- * Author:  Administrator
- * Purpose: Defines the Class Timer
- ***********************************************************************/
-
-class Timer {
+/**
+ * Created by zhuj@genture.com on 2017/07/06.
+ */
+public class Timer {
    private Integer x;
    private Integer y;
    private Integer width;

@@ -1,11 +1,8 @@
 package com.genture.device_operator;
-/***********************************************************************
- * Module:  Txtext.java
- * Author:  Administrator
- * Purpose: Defines the Class Txtext
- ***********************************************************************/
-
-class Txtext {
+/**
+ * Created by zhuj@genture.com on 2017/07/06.
+ */
+public class Txtext {
    private Integer x;
    private Integer y;
    private Integer width;

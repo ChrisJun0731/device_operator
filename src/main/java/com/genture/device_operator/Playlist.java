@@ -1,5 +1,7 @@
 package com.genture.device_operator;
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -9,24 +11,27 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/7/4.
  */
-class Playlist {
+public class Playlist {
+	private static Logger logger = Logger.getLogger(Playlist.class);
+
 	private List<Item> playlist;
-	private int num = 0;
+	private int num;
 
 	{
 		this.playlist = new ArrayList();
 	}
 
 	/**
-	 * æ’­æ”¾åˆ—è¡¨å­—ç¬¦ä¸²
+	 * »ñµÃ²¥·ÅÁÐ±íµÄ×Ö·û´®
+	 * @return ²¥·ÅÁÐ±íµÄ×Ö·û´®
 	 */
 	public String toPlayListString(){
-		String prefix = "[all]\n"+ "items=" + num + "\n";
+		String prefix = "[all]\n"+ "items=" + this.num + "\n";
 		String[] items_str = new String[playlist.size()];
 		for(int i=0; i<playlist.size(); i++){
 			Item item = playlist.get(i);
 			items_str[i] = "";
-			items_str[i] += "[item]" + i + "\n";
+			items_str[i] += "[item" + (i+1) + "]\n";
 			items_str[i] += "param=" + item.toParamString();
 			items_str[i] += item.toItemString();
 		}
@@ -39,17 +44,28 @@ class Playlist {
 	}
 
 	/**
-	 * åˆ›å»ºæ’­æ”¾åˆ—è¡¨æ–‡ä»¶
+	 * ´´½¨²¥·ÅÁÐ±íÎÄ¼þ
+	 * @return ²¥·ÅÁÐ±íÎÄ¼þ
 	 */
 	public File createPlayListFile(){
 		String playlist_str = toPlayListString();
 		int i = 1;
-		String filename = "playlist"+ i +".lst";
-		File file = new File("E:\\temp\\playlist",filename);
+		String path = "E:\\temp\\playlist";
+		File dir = new File(path);
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		String filename = "play00"+ i +".lst";
+		File file = new File(path ,filename);
 		while(file.exists() && i<=100){
 			i++;
-			filename = "playlist"+i+".lst";
-			file = new File("E:\\temp\\playlist", filename);
+			if(i>1 & i<10)
+				filename = "play00"+ i + ".lst";
+			else if(i<100)
+				filename = "play0" + i + ".lst";
+			else
+				filename = "play" + i + ".lst";
+			file = new File(path, filename);
 		}
 		try{
 			file.createNewFile();
@@ -57,6 +73,7 @@ class Playlist {
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			bufferedWriter.write(playlist_str);
 			bufferedWriter.flush();
+			logger.info("´´½¨²¥·ÅÁÐ±í"+filename+"³É¹¦!");
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -65,22 +82,15 @@ class Playlist {
 	}
 
 	public void addItem(Item item){
-		playlist.add(item);
-		num++;
+		this.playlist.add(item);
+		this.num++;
 	}
 
 	public void removeItem(int index){
-		playlist.remove(index);
-		num--;
+		this.playlist.remove(index);
+		this.num--;
 	}
 
-	public List<Item> getList() {
-		return playlist;
-	}
-
-	public void setList(List<Item> playlist) {
-		this.playlist = playlist;
-	}
 	public int getNum() {
 		return num;
 	}

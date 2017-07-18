@@ -1,12 +1,9 @@
 package com.genture.device_operator;
 
-/***********************************************************************
- * Module:  Img.java
- * Author:  Administrator
- * Purpose: Defines the Class Img
- ***********************************************************************/
-
-class Img {
+/**
+ * Created by zhuj@genture.com on 2017/07/06.
+ */
+public class Img {
    private Integer x;
    private Integer y;
    private String filename;
@@ -18,8 +15,7 @@ class Img {
    public String toImgStr(){
       String str = "";
       str = (x== null? "":x)+ "," + (y== null? "": y) + "," + (filename== null? "":filename)+ "," + (twinkle== null? "": twinkle)
-      + "," + (width== null? "": width) + "," + (height==null? "": height) + "\n";
-      str += stayTime + "\n";
+      + "," + (width== null? "": width) + "," + (height== null? "": height) + "\n";
       return str;
    }
 

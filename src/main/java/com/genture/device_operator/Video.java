@@ -1,11 +1,8 @@
 package com.genture.device_operator;
-/***********************************************************************
- * Module:  Video.java
- * Author:  Administrator
- * Purpose: Defines the Class Video
- ***********************************************************************/
-
-class Video {
+/**
+ * Created by zhuj@genture.com on 2017/07/06.
+ */
+public class Video {
    private Integer x;
    private Integer y;
    private Integer width;

@@ -17,7 +17,7 @@ class Util {
 	private static Logger logger = Logger.getLogger(Util.class);
 
 	/**
-	 * å°†ä¸€ä¸ªæŒ‰bufå­˜å‚¨çš„æ•´æ•°è½¬åŒ–ä¸ºint
+	 * ½«Ò»¸ö°´buf´æ´¢µÄÕûÊı×ª»¯Îªint
 	 * @param low
 	 * @param high
 	 * @return
@@ -29,7 +29,7 @@ class Util {
 	}
 
 	/**
-	 * å°†ä¸€ä¸ªä¸ºè´Ÿå€¼çš„byteè½¬åŒ–ä¸ºå…¶å‘¨æœŸå†…å¯¹åº”çš„æ­£æ•°
+	 * ½«Ò»¸öÎª¸ºÖµµÄbyte×ª»¯ÎªÆäÖÜÆÚÄÚ¶ÔÓ¦µÄÕıÊı
 	 * @param num
 	 * @return
 	 */
@@ -38,7 +38,7 @@ class Util {
 	}
 
 	/**
-	 * å°†ä¸€ä¸ªæ•´æ•°æŒ‰é«˜ä½ä½å­˜å‚¨
+	 * ½«Ò»¸öÕûÊı°´¸ßµÍÎ»´æ´¢
 	 * @param result
 	 * @param crc
 	 * @param index
@@ -49,7 +49,7 @@ class Util {
 	}
 
 	/**
-	 * è¿˜åŸè½¬ä¹‰åçš„æ•°æ®æµ
+	 * »¹Ô­×ªÒåºóµÄÊı¾İÁ÷
 	 * @param data
 	 * @return
 	 */
@@ -88,7 +88,7 @@ class Util {
 	}
 
 	/**
-	 * å°†ipçš„å­—ç¬¦ä¸²è½¬æ¢ä¸ºbyteæ•°æ®
+	 * ½«ipµÄ×Ö·û´®×ª»»ÎªbyteÊı¾İ
 	 * @param ip
 	 * @return
 	 */
@@ -102,7 +102,7 @@ class Util {
 	}
 
 	/**
-	 * å°†byteæ•°ç»„è½¬æ¢ä¸ºipåœ°å€çš„å­—ç¬¦ä¸²å½¢å¼
+	 * ½«byteÊı×é×ª»»ÎªipµØÖ·µÄ×Ö·û´®ĞÎÊ½
 	 * @param ip
 	 * @return
 	 */
@@ -113,7 +113,7 @@ class Util {
 	}
 
 	/**
-	 * åˆ›å»ºä¸´æ—¶æ–‡ä»¶ï¼Œç”¨æ¥å†™å…¥æˆªå±å›¾ç‰‡æµ
+	 * ´´½¨ÁÙÊ±ÎÄ¼ş£¬ÓÃÀ´Ğ´Èë½ØÆÁÍ¼Æ¬Á÷
 	 */
 	public File createTempFile(){
 		String path = "E:/capture";

@@ -1,7 +1,7 @@
 package com.genture.device_operator;
 
 /**
- * Created by Administrator on 2017/7/9.
+ * Created by zhuj@genture.com on 2017/7/9.
  */
 public class BasicParam {
     private String screen_number;

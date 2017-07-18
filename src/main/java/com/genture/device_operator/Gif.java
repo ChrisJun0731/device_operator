@@ -1,10 +1,9 @@
-package com.genture.device_operator; /***********************************************************************
- * Module:  Gif.java
- * Author:  Administrator
- * Purpose: Defines the Class Gif
- ***********************************************************************/
+package com.genture.device_operator;
 
-class Gif {
+/**
+ * Created by zhuj@genture.com on 2017/07/06.
+ */
+public class Gif {
    private Integer x;
    private Integer y;
    private Integer width;

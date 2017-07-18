@@ -25,7 +25,7 @@ class TCPClient {
     }
 
     /**
-     * å‘æœåŠ¡å™¨ç«¯å‘é€å¸§æ•°æ®
+     * Ïò·şÎñÆ÷¶Ë·¢ËÍÖ¡Êı¾İ
      * @param dataFrame
      */
     public void send(byte[] dataFrame){
@@ -41,7 +41,7 @@ class TCPClient {
     }
 
     /**
-     * ä»æœåŠ¡å™¨ç«¯æ¥å—æ•°æ®ï¼Œå¹¶è‡ªåŠ¨åˆ¤æ–­æ¥å—æ•°æ®çš„å¤§å°
+     * ´Ó·şÎñÆ÷¶Ë½ÓÊÜÊı¾İ£¬²¢×Ô¶¯ÅĞ¶Ï½ÓÊÜÊı¾İµÄ´óĞ¡
      * @return
      */
     public byte[] receive(){
@@ -49,7 +49,7 @@ class TCPClient {
         try{
             InputStream is = this.socket.getInputStream();
             BufferedInputStream bis = new BufferedInputStream(is);
-            //ä¸ºäº†é˜²æ­¢æœåŠ¡å™¨ç«¯è¿˜æ²¡å‘æµä¸­å‘é€æ•°æ®ï¼Œè®©çº¿ç¨‹é˜»å¡,å…ˆè¯»ä¸€ä¸ªå­—èŠ‚ã€‚
+            //ÎªÁË·ÀÖ¹·şÎñÆ÷¶Ë»¹Ã»ÏòÁ÷ÖĞ·¢ËÍÊı¾İ£¬ÈÃÏß³Ì×èÈû,ÏÈ¶ÁÒ»¸ö×Ö½Ú¡£
             byte first_byte = (byte)bis.read();
             int available = bis.available();
             result = new byte[available+1];

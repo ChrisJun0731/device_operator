@@ -1,4 +1,5 @@
-package com.genture.device_operator; /***********************************************************************
+package com.genture.device_operator;
+/***********************************************************************
  * Module:  Item.java
  * Author:  Administrator
  * Purpose: Defines the Class Item
@@ -9,7 +10,7 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-class Item {
+public class Item {
     Logger logger = Logger.getLogger(Item.class);
 
     private Long stayTime;
@@ -50,39 +51,39 @@ class Item {
             if(displayList.get(i) instanceof Txt){
                 Txt txt = (Txt)displayList.get(i);
                 txt_num++;
-                item_str[i] = "txt" + txt_num + txt.toTxtString() + "txtparam" + txt_num +
+                item_str[i] = "txt" + txt_num + "=" + txt.toTxtString() + "txtparam" + txt_num + "=" +
                         txt.toTxtParamString();
             }
             else if(displayList.get(i) instanceof Gif){
                 Gif gif = (Gif)displayList.get(i);
                 gif_num++;
-                item_str[i] = "gif"+ gif_num + gif.toGifString();
+                item_str[i] = "gif"+ gif_num + "=" + gif.toGifString();
             }
             else if(displayList.get(i) instanceof Img){
                 Img img = (Img)displayList.get(i);
                 img_num++;
-                item_str[i] = "img" + img_num + img.toImgStr() + "imgparam" + img_num +
+                item_str[i] = "img" + img_num + "=" + img.toImgStr() + "imgparam" + img_num + "=" +
                         img.toImgParamStr();
             }
             else if(displayList.get(i) instanceof Timer){
                 Timer timer = (Timer)displayList.get(i);
                 timer_num++;
-                item_str[i] = "timer" + timer_num + timer.toTimerString();
+                item_str[i] = "timer" + timer_num + "=" + timer.toTimerString();
             }
             else if(displayList.get(i) instanceof Video){
                 Video video = (Video)displayList.get(i);
                 video_num++;
-                item_str[i] = "video" + video_num + video.toVideoString();
+                item_str[i] = "video" + video_num + "=" + video.toVideoString();
             }
             else if(displayList.get(i) instanceof Txtext){
                 Txtext txtext = new Txtext();
                 txtext_num++;
-                item_str[i] = "txtext" + txtext_num + txtext.toTxtextString();
+                item_str[i] = "txtext" + txtext_num + "=" + txtext.toTxtextString();
             }
         }
         String item_string = "";
         for(int i=0; i<displayList.size(); i++){
-            item_string += displayList.get(i);
+            item_string += item_str[i];
         }
         return item_string;
     }
@@ -98,7 +99,7 @@ class Item {
     public void addGif(Gif gif){
         gif_num++;
         if(gif_num >= GIF_NUM_RESTRICT){
-            logger.error("姣忎釜item鑳戒笂浼犵殑gif涓嶈兘瓒呰繃2涓紒");
+            logger.error("每个item能上传的gif不能超过2个！");
             return;
         }
         displayList.add(gif);
@@ -111,7 +112,7 @@ class Item {
     public void addVideo(Video video){
         video_num++;
         if(video_num >= VIDEO_NUM_RESTRICT){
-            logger.error("姣忎釜item涓婁紶鐨刧if涓嶈兘瓒呰繃2涓紒");
+            logger.error("每个item上传的gif不能超过2个！");
             return;
         }
         displayList.add(video);
@@ -181,11 +182,4 @@ class Item {
         this.play_count = play_count;
     }
 
-    public List getDisplayList() {
-        return displayList;
-    }
-
-    public void setDisplayList(List displayList) {
-        this.displayList = displayList;
-    }
 }

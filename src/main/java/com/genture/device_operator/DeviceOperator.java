@@ -17,9 +17,9 @@ public class DeviceOperator {
     private DataFrame dataFrame = null;
     private Util util = new Util();
     private Device device = null;
-    //è®¾ç½®æ¯ä¸ªå—çš„å¤§å° ç”±æ•°æ®åŸŸçš„å¤§å°åŠ ä¸Šå¸§ç»“æ„ä¸­å…¶ä»–å†…å®¹çš„å¤§å° å¤–åŠ æ•°æ®å—å·å ä¸¤ä¸ªå­—èŠ‚
+    //ÉèÖÃÃ¿¸ö¿éµÄ´óĞ¡ ÓÉÊı¾İÓòµÄ´óĞ¡¼ÓÉÏÖ¡½á¹¹ÖĞÆäËûÄÚÈİµÄ´óĞ¡ Íâ¼ÓÊı¾İ¿éºÅÕ¼Á½¸ö×Ö½Ú
     private final int Block_Size = 5*1024;
-    //å—çš„å¤§å°å¯¹åº”çš„å¸§æ•°æ®ä¸­å­˜å‚¨æ–¹å¼
+    //¿éµÄ´óĞ¡¶ÔÓ¦µÄÖ¡Êı¾İÖĞ´æ´¢·½Ê½
     private final byte[] Block_Size_Buf = new byte[2];
 
     {
@@ -33,7 +33,7 @@ public class DeviceOperator {
     }
 
     /**
-     * æ‰“å¼€å±å¹•
+     * ´ò¿ªÆÁÄ»
      */
     public void openScreen(){
         try{
@@ -41,10 +41,10 @@ public class DeviceOperator {
             this.tcpClient.send(data_frame);
             byte[] result = this.tcpClient.receive();
             if(result[4] == 1){
-                logger.info("æ‰“å¼€å±å¹•æˆåŠŸ");
+                logger.info("´ò¿ªÆÁÄ»³É¹¦");
             }
             else{
-                logger.error("å¼€å¯å±å¹•å¤±è´¥!");
+                logger.error("¿ªÆôÆÁÄ»Ê§°Ü!");
             }
         }
         catch(Exception e){
@@ -53,7 +53,7 @@ public class DeviceOperator {
     }
 
     /**
-     * å…³é—­å±å¹•
+     * ¹Ø±ÕÆÁÄ»
      */
     public void closeScreen(){
         try{
@@ -61,10 +61,10 @@ public class DeviceOperator {
             this.tcpClient.send(data_frame);
             byte[] result = this.tcpClient.receive();
             if(result[4] == 1){
-                logger.info("å…³é—­å±å¹•æˆåŠŸ");
+                logger.info("¹Ø±ÕÆÁÄ»³É¹¦");
             }
             else{
-                logger.error("å…³é—­å±å¹•å¤±è´¥!");
+                logger.error("¹Ø±ÕÆÁÄ»Ê§°Ü!");
             }
         }
         catch(Exception e){
@@ -73,8 +73,8 @@ public class DeviceOperator {
     }
 
     /**
-     * ä¸‹å‘æ–‡ä»¶
-     * @param filePath æ–‡ä»¶è·¯å¾„
+     * ÏÂ·¢ÎÄ¼ş
+     * @param filePath ÎÄ¼şÂ·¾¶
      */
     public void sendFile(String filePath){
         File file = new File(filePath);
@@ -85,14 +85,15 @@ public class DeviceOperator {
         }
      }
 
+
     /**
-     * å‘é€æ–‡ä»¶åä»¥åŠæ•°æ®å—çš„å¤§å°
-     * @param fileName æ–‡ä»¶åç§°
+     * ·¢ËÍÎÄ¼şÃûÒÔ¼°Êı¾İ¿éµÄ´óĞ¡
+     * @param fileName ÎÄ¼şÃû³Æ
      */
     private boolean sendFileName(String fileName){
         byte[] file_name = null;
         try{
-            file_name = fileName.getBytes("gbk");
+            file_name = fileName.getBytes();
         }
         catch(Exception e){
             logger.error(e.getMessage());
@@ -104,15 +105,15 @@ public class DeviceOperator {
         this.tcpClient.send(data_frame);
         byte[] result = this.tcpClient.receive();
          if(result[3] == 0x12 && result[4] == 0){
-            logger.info("æ–‡ä»¶åå‘é€å¤±è´¥");
+            logger.info("ÎÄ¼şÃû·¢ËÍÊ§°Ü");
             return false;
         }
         else if(result[3] == 0x12 && result[4] == 1){
-            logger.info("æ–‡ä»¶åå‘é€æˆåŠŸ");
+            logger.info("ÎÄ¼şÃû·¢ËÍ³É¹¦");
             return true;
         }
         else if(result[3] ==0x12 && result[4] == 2){
-            logger.info("æ–‡ä»¶å·²å­˜åœ¨");
+            logger.info("ÎÄ¼şÒÑ´æÔÚ");
             return false;
         }
         else{
@@ -121,8 +122,8 @@ public class DeviceOperator {
     }
 
     /**
-     * å‘é€æ–‡ä»¶å†…å®¹
-     * @param filePath æ–‡ä»¶è·¯å¾„
+     * ·¢ËÍÎÄ¼şÄÚÈİ
+     * @param filePath ÎÄ¼şÂ·¾¶
      */
     private void sendFileContent(String filePath){
         File file = new File(filePath);
@@ -151,7 +152,7 @@ public class DeviceOperator {
                 this.tcpClient.send(data_frame);
                 byte[] result = this.tcpClient.receive();
                 if(result[6] == 1){
-                    logger.info("æ•°æ®å—"+block_num+"å‘é€æˆåŠŸï¼");
+                    logger.info("Êı¾İ¿é"+block_num+"·¢ËÍ³É¹¦£¡");
                 }
                 int try_times = 0;
                 while(result[6] == 0 && try_times<10){
@@ -160,16 +161,16 @@ public class DeviceOperator {
                     try_times++;
                 }
                 if(try_times>=10){
-                    logger.error("æ•°æ®å—"+block_num+"å‘é€å¤±è´¥ï¼è¯·æ£€æŸ¥ç½‘ç»œæ˜¯å¦è¿é€šï¼Œç¨‹åºç»ˆæ­¢ï¼");
+                    logger.error("Êı¾İ¿é"+block_num+"·¢ËÍÊ§°Ü£¡Çë¼ì²éÍøÂçÊÇ·ñÁ¬Í¨£¬³ÌĞòÖÕÖ¹£¡");
                     return;
                 }
                 if(last_block_flag){
                     byte[] file_send_result = this.tcpClient.receive();
                     if(util.mapByte2Int(file_send_result[3]) == 0xf9 && file_send_result[4] == 1){
-                        logger.info("æ–‡ä»¶å‘é€æˆåŠŸ");
+                        logger.info("ÎÄ¼ş·¢ËÍ³É¹¦");
                     }
                     else{
-                        logger.error("æ–‡ä»¶å‘é€å¤±è´¥!è¯·æ£€æŸ¥æ–‡ä»¶åç¼€åæ˜¯å¦ç¬¦åˆè¦æ±‚ï¼ï¼ˆåç¼€åªèƒ½æ˜¯.lst .jpg .gif .wmv2ä¹‹ä¸€ã€‚ï¼‰");
+                        logger.error("ÎÄ¼ş·¢ËÍÊ§°Ü!Çë¼ì²éÎÄ¼şºó×ºÃûÊÇ·ñ·ûºÏÒªÇó£¡£¨ºó×ºÖ»ÄÜÊÇ.lst .jpg .gif .wmv2Ö®Ò»¡££©");
                     }
                 }
                 block_num++;
@@ -177,7 +178,7 @@ public class DeviceOperator {
             if(last_block_flag == false){
                 byte[] block_num_buf = new byte[2];
                 util.int2buf(block_num, block_num_buf, 0);
-                //è¿™é‡Œçš„ç©ºçš„æ•°æ®å—æ˜¯æŒ‡æ²¡æœ‰æ•°æ®å—
+                //ÕâÀïµÄ¿ÕµÄÊı¾İ¿éÊÇÖ¸Ã»ÓĞÊı¾İ¿é
                 byte[] data = new byte[block_num_buf.length];
                 System.arraycopy(block_num_buf, 0, data, 0, block_num_buf.length);
                 byte[] data_frame = dataFrame.createDataFrame(0x13, data);
@@ -185,10 +186,10 @@ public class DeviceOperator {
                 byte[] result = this.tcpClient.receive();
                 if(last_block_flag){
                     if(result[14] == 1){
-                        logger.info("æ–‡ä»¶å‘é€æˆåŠŸ");
+                        logger.info("ÎÄ¼ş·¢ËÍ³É¹¦");
                     }
                     else{
-                        logger.error("æ–‡ä»¶å‘é€å¤±è´¥");
+                        logger.error("ÎÄ¼ş·¢ËÍÊ§°Ü");
                     }
                 }
             }
@@ -200,8 +201,8 @@ public class DeviceOperator {
     }
 
     /**
-     * è·å–è®¾å¤‡çŠ¶æ€
-     * @return å­—èŠ‚æ•°ç»„
+     * »ñÈ¡Éè±¸×´Ì¬
+     * @return ×Ö½ÚÊı×é
      */
     private byte[] getDeviceState(){
         byte[] data_frame = this.dataFrame.createDataFrame(0x01, null);
@@ -210,8 +211,8 @@ public class DeviceOperator {
     }
 
     /**
-     * è·å–è®¾å¤‡æ—¥æœŸå’Œæ—¶é—´
-     * @return jsonå­—ç¬¦ä¸²
+     * »ñÈ¡Éè±¸ÈÕÆÚºÍÊ±¼ä
+     * @return json×Ö·û´®
      */
     public String getDateAndTime(){
         byte[] result = getDeviceState();
@@ -223,18 +224,18 @@ public class DeviceOperator {
             int minute = result[9];
             int second = result[10];
 
-            logger.info("è·å–è®¾å¤‡æ—¶é—´æˆåŠŸ");
+            logger.info("»ñÈ¡Éè±¸Ê±¼ä³É¹¦");
             return "{year:"+year+",month:"+month+",day:"+day+",hour:"+hour+",minute:"+minute+",second:"+second+"}";
         }
         else{
-            logger.error("è®¾å¤‡æ— å“åº”");
+            logger.error("Éè±¸ÎŞÏìÓ¦");
             return null;
         }
     }
 
     /**
-     * è·å–å±å¹•å¤§å°
-     * @return jsonå­—ç¬¦ä¸²
+     * »ñÈ¡ÆÁÄ»´óĞ¡
+     * @return json×Ö·û´®
      */
     public String getScreenSize(){
         byte[] data_frame = dataFrame.createDataFrame(0x82, null);
@@ -243,33 +244,33 @@ public class DeviceOperator {
         if(util.mapByte2Int(result[3]) == 0x83){
             int width = util.buf2int(result[4], result[5]);
             int height = util.buf2int(result[6], result[7]);
-            logger.info("è·å–å±å¹•å¤§å°æˆåŠŸï¼");
+            logger.info("»ñÈ¡ÆÁÄ»´óĞ¡³É¹¦£¡");
             return "{height:" + height + ",width:"+ width +"}";
         }
         else{
-            logger.error("è®¾å¤‡æ— å“åº”");
+            logger.error("Éè±¸ÎŞÏìÓ¦");
             return null;
         }
     }
 
     /**
-     * é‡å¯è®¾å¤‡
+     * ÖØÆôÉè±¸
      */
     public void restartDevice(){
         byte[] data_frame = dataFrame.createDataFrame(0x0d, null);
         this.tcpClient.send(data_frame);
         byte[] result = this.tcpClient.receive();
         if(result[4]==0x0e && result[5] == 1){
-            logger.info("é‡å¯è®¾å¤‡æˆåŠŸï¼");
+            logger.info("ÖØÆôÉè±¸³É¹¦£¡");
         }
         else{
-            logger.error("é‡å¯è®¾å¤‡å¤±è´¥!");
+            logger.error("ÖØÆôÉè±¸Ê§°Ü!");
         }
     }
 
     /**
-     * è®¾ç½®å…³å±æ¸©åº¦ï¼Œå³æ¸©åº¦è¾¾åˆ°å¤šå°‘åå…³å±ã€‚0è¡¨ç¤ºä¸è¿›è¡Œå…³å±å¤„ç†
-     * @param temperature å…³å±æ¸©åº¦
+     * ÉèÖÃ¹ØÆÁÎÂ¶È£¬¼´ÎÂ¶È´ïµ½¶àÉÙºó¹ØÆÁ¡£0±íÊ¾²»½øĞĞ¹ØÆÁ´¦Àí
+     * @param temperature ¹ØÆÁÎÂ¶È
      */
     public void setCloseScreenTemperature(int temperature){
         byte[] data = new byte[6];
@@ -278,40 +279,40 @@ public class DeviceOperator {
         this.tcpClient.send(data_frame);
         byte[] result = this.tcpClient.receive();
         if(result[3] == 0x16 && result[4] == 1){
-            logger.info("è®¾ç½®å…³å±æ¸©åº¦æˆåŠŸï¼");
+            logger.info("ÉèÖÃ¹ØÆÁÎÂ¶È³É¹¦£¡");
         }
         else{
-            logger.error("è®¾ç½®å…³å±æ¸©åº¦å¤±è´¥ï¼");
+            logger.error("ÉèÖÃ¹ØÆÁÎÂ¶ÈÊ§°Ü£¡");
         }
     }
 
     /**
-     * è·å¾—è®¾å¤‡å…³å±æ¸©åº¦
-     * @return å…³å±æ¸©åº¦
-     * -1 è¡¨ç¤ºæŸ¥è¯¢å¤±è´¥
+     * »ñµÃÉè±¸¹ØÆÁÎÂ¶È
+     * @return ¹ØÆÁÎÂ¶È
+     * -1 ±íÊ¾²éÑ¯Ê§°Ü
      */
     public int getCloseScreenTemperature(){
         byte[] data_frame = dataFrame.createDataFrame(0x29, null);
         this.tcpClient.send(data_frame);
         byte[] result = this.tcpClient.receive();
         if(util.mapByte2Int(result[3])== 0x2a){
-            logger.info("æŸ¥è¯¢å±å¹•æŠ¥è­¦æ¸©åº¦æˆåŠŸï¼š"+ result[9]);
+            logger.info("²éÑ¯ÆÁÄ»±¨¾¯ÎÂ¶È³É¹¦£º"+ result[9]);
             return result[9];
         }
         else{
-            logger.error("è®¾å¤‡æ— å“åº”");
+            logger.error("Éè±¸ÎŞÏìÓ¦");
             return -1;
         }
     }
 
     /**
-     * è·å–æœºç®±æ¸©åº¦
-     * @return æœºç®±æ‰€å¤„ç¯å¢ƒæ¸©åº¦
+     * »ñÈ¡»úÏäÎÂ¶È
+     * @return »úÏäËù´¦»·¾³ÎÂ¶È
      */
     public int getEnvironmentTemperature(){
         byte[] result = getDeviceState();
         int temperature = 0;
-        //ç¬¦å·ä½1è¡¨ç¤ºæ­£æ•°ï¼Œ2è¡¨ç¤ºè´Ÿæ•°
+        //·ûºÅÎ»1±íÊ¾ÕıÊı£¬2±íÊ¾¸ºÊı
         int symbol = 1;
         if(util.mapByte2Int(result[3]) == 0x02){
             symbol = result[14];
@@ -321,32 +322,32 @@ public class DeviceOperator {
             }
         }
         else{
-            logger.error("è®¾å¤‡æ— å“åº”");
+            logger.error("Éè±¸ÎŞÏìÓ¦");
         }
         if(symbol == 1){
-            logger.info("æŸ¥è¯¢å½“å‰ç¯å¢ƒæ¸©åº¦æˆåŠŸ,å½“å‰ç¯å¢ƒæ¸©åº¦ä¸ºï¼š"+temperature);
+            logger.info("²éÑ¯µ±Ç°»·¾³ÎÂ¶È³É¹¦,µ±Ç°»·¾³ÎÂ¶ÈÎª£º"+temperature);
         }
         if(symbol == 2){
-            logger.info("æŸ¥è¯¢å½“å‰ç¯å¢ƒæ¸©åº¦æˆåŠŸ,å½“å‰ç¯å¢ƒæ¸©åº¦ä¸ºï¼š-"+temperature);
+            logger.info("²éÑ¯µ±Ç°»·¾³ÎÂ¶È³É¹¦,µ±Ç°»·¾³ÎÂ¶ÈÎª£º-"+temperature);
         }
         return temperature;
     }
 
     /**
-     * è·å–è®¾å¤‡å¼€å…³é—¨çŠ¶æ€
+     * »ñÈ¡Éè±¸¿ª¹ØÃÅ×´Ì¬
      * @return
-     * openè¡¨ç¤ºæ‰“å¼€
-     * closeè¡¨ç¤ºå…³é—­
+     * open±íÊ¾´ò¿ª
+     * close±íÊ¾¹Ø±Õ
      */
     public String getDoorState(){
         byte[] result = getDeviceState();
         if(util.mapByte2Int(result[3]) == 0x02){
             if(result[11] == 1){
-                logger.info("é—¨çŠ¶æ€æŸ¥è¯¢æˆåŠŸï¼å½“å‰é—¨çŠ¶æ€ä¸ºopen");
+                logger.info("ÃÅ×´Ì¬²éÑ¯³É¹¦£¡µ±Ç°ÃÅ×´Ì¬Îªopen");
                 return  "open";
             }
             else if(result[11] == 2){
-                logger.info("é—¨çŠ¶æ€æŸ¥è¯¢æˆåŠŸï¼å½“å‰é—¨çŠ¶æ€ä¸ºclose");
+                logger.info("ÃÅ×´Ì¬²éÑ¯³É¹¦£¡µ±Ç°ÃÅ×´Ì¬Îªclose");
                 return  "close";
             }
             else{
@@ -354,16 +355,16 @@ public class DeviceOperator {
             }
         }
         else{
-            logger.error("è®¾å¤‡æ— å“åº”");
+            logger.error("Éè±¸ÎŞÏìÓ¦");
             return null;
         }
     }
 
     /**
-     * è®¾ç½®è™šè¿æ¥
-     * @param open 1 å¼€å¯è™šè¿æ¥ 0 å…³é—­è™šè¿æ¥
-     * @param seconds è™šè¿æ¥æ£€æµ‹æ—¶é—´é˜ˆå€¼
-     * @param play è™šè¿æ¥çŠ¶æ€æ’­æ”¾èŠ‚ç›®
+     * ÉèÖÃĞéÁ¬½Ó
+     * @param open 1 ¿ªÆôĞéÁ¬½Ó 0 ¹Ø±ÕĞéÁ¬½Ó
+     * @param seconds ĞéÁ¬½Ó¼ì²âÊ±¼äãĞÖµ
+     * @param play ĞéÁ¬½Ó×´Ì¬²¥·Å½ÚÄ¿
      */
     public void setVirtualConn(int open, int seconds, int play){
         byte[] secondsBuf = new byte[2];
@@ -373,16 +374,16 @@ public class DeviceOperator {
         this.tcpClient.send(data_frame);
         byte[] result = this.tcpClient.receive();
         if(util.mapByte2Int(result[3]) == 0xf4 && result[4] == 1){
-            logger.info("è™šè¿æ¥è®¾ç½®æˆåŠŸï¼");
+            logger.info("ĞéÁ¬½ÓÉèÖÃ³É¹¦£¡");
         }
         else{
-            logger.error("è™šè¿æ¥è®¾ç½®å¤±è´¥ï¼");
+            logger.error("ĞéÁ¬½ÓÉèÖÃÊ§°Ü£¡");
         }
     }
 
     /**
-     * è·å–å±å¹•çš„åç‚¹æ€»æ•°
-     * @return åç‚¹æ€»æ•°
+     * »ñÈ¡ÆÁÄ»µÄ»µµã×ÜÊı
+     * @return »µµã×ÜÊı
      */
     public int getTotalBadPoint(){
         byte[] data_frame = dataFrame.createDataFrame(0x0b, null);
@@ -392,21 +393,21 @@ public class DeviceOperator {
         if(util.mapByte2Int(result[3]) == 0x0c){
             if(result[4]==1){
                 bad_point_num = util.buf2int(result[5], result[6]);
-                logger.info("ç‚¹æ£€æ£€æµ‹æˆåŠŸ!");
+                logger.info("µã¼ì¼ì²â³É¹¦!");
             }
             else{
-                logger.error("ç‚¹æ£€æ“ä½œå¤±è´¥");
+                logger.error("µã¼ì²Ù×÷Ê§°Ü");
             }
         }
         else{
-            logger.error("è®¾å¤‡æ— å“åº”");
+            logger.error("Éè±¸ÎŞÏìÓ¦");
         }
         return bad_point_num;
     }
 
     /**
-     * è·å–å±å¹•å†…å®¹
-     * @return å­—èŠ‚æ•°ç»„
+     * »ñÈ¡ÆÁÄ»ÄÚÈİ
+     * @return ×Ö½ÚÊı×é
      */
     @Deprecated
     private byte[] getDisplayContent(){
@@ -417,12 +418,12 @@ public class DeviceOperator {
     }
 
     /**
-     * æ‰‹åŠ¨è®¾ç½®å±å¹•äº®åº¦
-     * @param light å±å¹•äº®åº¦èŒƒå›´ï¼š1-255
+     * ÊÖ¶¯ÉèÖÃÆÁÄ»ÁÁ¶È
+     * @param light ÆÁÄ»ÁÁ¶È·¶Î§£º1-255
      */
     public void setLightByHand(int light){
         if(light<1 || light >255){
-            logger.error("è®¾ç½®çš„äº®åº¦èŒƒå›´è¶…å‡ºäº†1-255ï¼");
+            logger.error("ÉèÖÃµÄÁÁ¶È·¶Î§³¬³öÁË1-255£¡");
             return;
         }
         byte[] data = {(byte)2, (byte)light};
@@ -430,29 +431,29 @@ public class DeviceOperator {
         this.tcpClient.send(data_frame);
         byte[] result = this.tcpClient.receive();
         if(result[3] == 0x08 && result[4] == 1){
-            logger.info("æ‰‹åŠ¨è®¾ç½®å±å¹•äº®åº¦æˆåŠŸï¼");
+            logger.info("ÊÖ¶¯ÉèÖÃÆÁÄ»ÁÁ¶È³É¹¦£¡");
         }
         else{
-            logger.error("æ‰‹åŠ¨è®¾ç½®å±å¹•äº®åº¦å¤±è´¥ï¼");
+            logger.error("ÊÖ¶¯ÉèÖÃÆÁÄ»ÁÁ¶ÈÊ§°Ü£¡");
         }
     }
 
     /**
-     * åˆ é™¤æ§åˆ¶å¡ä¸Šæ‰€æœ‰æ–‡ä»¶
+     * É¾³ı¿ØÖÆ¿¨ÉÏËùÓĞÎÄ¼ş
      */
     public void clearAllFiles(){
         clearFiles((byte)0);
     }
 
     /**
-     * åˆ é™¤å½“å‰æ’­æ”¾åˆ—è¡¨ä¸­æ–‡ä»¶ä»¥å¤–çš„æ‰€æœ‰æ–‡ä»¶
+     * É¾³ıµ±Ç°²¥·ÅÁĞ±íÖĞÎÄ¼şÒÔÍâµÄËùÓĞÎÄ¼ş
      */
     public void clearInvalidFiles(){
         clearFiles((byte)1);
     }
 
     /**
-     * æ¸…ç†æ–‡ä»¶
+     * ÇåÀíÎÄ¼ş
      */
     private void clearFiles(byte type){
         byte[] data_frame = dataFrame.createDataFrame(0x7c, type);
@@ -460,19 +461,19 @@ public class DeviceOperator {
         byte[] result = this.tcpClient.receive();
         if(util.mapByte2Int(result[3])== 0x7d && result[4] == 1){
             if(type == 0){
-                logger.info("å·²æ¸…ç†æ§åˆ¶å¡ä¸Šæ‰€æœ‰æ–‡ä»¶ï¼");
+                logger.info("ÒÑÇåÀí¿ØÖÆ¿¨ÉÏËùÓĞÎÄ¼ş£¡");
             }
             else if(type == 1){
-                logger.info("å·²æ¸…ç†æ§åˆ¶å¡ä¸Šé™¤å½“å‰æ’­æ”¾åˆ—è¡¨çš„æ‰€æœ‰æ–‡ä»¶ï¼");
+                logger.info("ÒÑÇåÀí¿ØÖÆ¿¨ÉÏ³ıµ±Ç°²¥·ÅÁĞ±íµÄËùÓĞÎÄ¼ş£¡");
             }
         }
         else{
-            logger.error("æ‰§è¡Œæ¸…ç†æ–‡ä»¶æ“ä½œå¤±è´¥ï¼");
+            logger.error("Ö´ĞĞÇåÀíÎÄ¼ş²Ù×÷Ê§°Ü£¡");
         }
     }
 
     /**
-     * è·å–å±å¹•æˆªå›¾
+     * »ñÈ¡ÆÁÄ»½ØÍ¼
      */
     public void captureScreen(){
         File file = util.createTempFile();
@@ -514,8 +515,8 @@ public class DeviceOperator {
     }
 
     /**
-     * æŒ‡å®šæ’­æ”¾åˆ—è¡¨è¿›è¡Œæ’­æ”¾
-     * @param num æ’­æ”¾åˆ—è¡¨ç¼–å·
+     * Ö¸¶¨²¥·ÅÁĞ±í½øĞĞ²¥·Å
+     * @param num ²¥·ÅÁĞ±í±àºÅ
      */
     public void playAssignedList(int num){
         byte[] data_frame = dataFrame.createDataFrame(0x1b, (byte)num);
@@ -523,17 +524,17 @@ public class DeviceOperator {
         byte[] result = this.tcpClient.receive();
         if(util.mapByte2Int(result[3])== 0x1c){
             if(result[4] == 1){
-                logger.info("æŒ‡å®šæ’­æ”¾åˆ—è¡¨è¿›è¡Œæ’­æ”¾æˆåŠŸ!");
+                logger.info("Ö¸¶¨²¥·ÅÁĞ±í½øĞĞ²¥·Å³É¹¦!");
             }
             else{
-                logger.error("æŒ‡å®šæ’­æ”¾åˆ—è¡¨æ’­æ”¾å¤±è´¥!");
+                logger.error("Ö¸¶¨²¥·ÅÁĞ±í²¥·ÅÊ§°Ü!");
             }
         }
     }
 
     /**
-     * è®¾ç½®å±ä½“åŸºæœ¬å‚æ•°
-     * @param basicParam
+     * ÉèÖÃÆÁÌå»ù±¾²ÎÊı
+     * @param basicParam »ù±¾²ÎÊı¶ÔÏó
      */
     public void setBasicParam(BasicParam basicParam){
         byte[] data = convertBasicParam2Data(basicParam);
@@ -542,20 +543,20 @@ public class DeviceOperator {
         byte[] result = this.tcpClient.receive();
         if(result[3] == 0x1a){
             if(result[4] == 1){
-                logger.info("è®¾å¤‡åŸºæœ¬å‚æ•°è®¾ç½®æˆåŠŸ!");
+                logger.info("Éè±¸»ù±¾²ÎÊıÉèÖÃ³É¹¦!");
             }
             else{
-                logger.error("è®¾å¤‡åŸºæœ¬å‚æ•°è®¾ç½®å¤±è´¥!");
+                logger.error("Éè±¸»ù±¾²ÎÊıÉèÖÃÊ§°Ü!");
             }
         }
         else{
-            logger.error("è®¾å¤‡æ— å“åº”!");
+            logger.error("Éè±¸ÎŞÏìÓ¦!");
         }
     }
 
     /**
-     * æŸ¥è¯¢è®¾å¤‡çš„åŸºæœ¬å‚æ•°
-     * @return
+     * ²éÑ¯Éè±¸µÄ»ù±¾²ÎÊı
+     * @return »ù±¾²ÎÊı¶ÔÏó
      */
     public BasicParam queryBasicParam(){
         byte[] data_frame = dataFrame.createDataFrame(0x27, null);
@@ -566,20 +567,20 @@ public class DeviceOperator {
             basicParam = convertData2BasicParam(result);
         }
         else{
-            logger.error("è®¾å¤‡æ— å“åº”ï¼");
+            logger.error("Éè±¸ÎŞÏìÓ¦£¡");
         }
         return basicParam;
     }
 
     /**
-     * å…³é—­ä¸è®¾å¤‡è¿æ¥çš„tcpè¿æ¥
+     * ¹Ø±ÕÓëÉè±¸Á¬½ÓµÄtcpÁ¬½Ó
      */
     public void disconnect(){
         this.tcpClient.close();
     }
 
     /**
-     * å°†basicParamå¯¹è±¡è½¬æ¢ä¸ºbyteæ•°ç»„
+     * ½«basicParam¶ÔÏó×ª»»ÎªbyteÊı×é
      * @param basicParam
      * @return
      */
@@ -614,7 +615,7 @@ public class DeviceOperator {
     }
 
     /**
-     * å°†byteæ•°ç»„è½¬æ¢ä¸ºBasicParamå¯¹è±¡
+     * ½«byteÊı×é×ª»»ÎªBasicParam¶ÔÏó
      * @param data
      * @return
      */

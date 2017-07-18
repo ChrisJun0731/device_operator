@@ -1,11 +1,8 @@
 package com.genture.device_operator;
-/***********************************************************************
- * Module:  Txt.java
- * Author:  Administrator
- * Purpose: Defines the Class Txt
- ***********************************************************************/
-
-class Txt {
+/**
+ * Created by zhuj@genture.com on 2017/07/06.
+ */
+public class Txt {
    private Integer x;
    private Integer y;
    private Integer font;
@@ -19,20 +16,18 @@ class Txt {
    private Integer font_style;
    private Integer char_space;
    private Integer queue_mode;
-   private Integer scroll_direction;
 
    public String toTxtString(){
       String txt = "";
       txt += (x== null? "": x) + "," + (y== null? "": y) + "," + (font== null? "": font) + "," + (font_size==null? "": font_size)
-      + "," + (foreground_color== null? "": foreground_color) + "," + (background_color== null? "": background_color) + "," +
-              "," + (twinkle== null? "": twinkle) + "," + (content== null? "": content) + "," + (width== null? "": width)+ "," +
+      + "," + (foreground_color== null? "": foreground_color) + "," + (background_color== null? "": background_color) + ","
+              + (twinkle== null? "": twinkle) + "," + (content== null? "": content) + "," + (width== null? "": width)+ "," +
               (height== null? "": height) + "," + (font_style==null? "": font_style) + "\n";
       return txt;
    }
 
    public String toTxtParamString(){
-      String str = (char_space== null? "": char_space) + "," + (queue_mode== null? "": queue_mode) + "," +
-              (scroll_direction== null? "": scroll_direction) + "\n";
+      String str = (char_space== null? "": char_space) + "," + (queue_mode== null? "": queue_mode)+ "\n";
       return str;
    }
 
@@ -140,11 +135,4 @@ class Txt {
       this.queue_mode = queue_mode;
    }
 
-   public int getScroll_direction() {
-      return scroll_direction;
-   }
-
-   public void setScroll_direction(int scroll_direction) {
-      this.scroll_direction = scroll_direction;
-   }
 }
