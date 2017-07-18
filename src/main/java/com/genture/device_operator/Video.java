@@ -3,12 +3,12 @@ package com.genture.device_operator;
  * Created by zhuj@genture.com on 2017/07/06.
  */
 public class Video {
-   private Integer x;
-   private Integer y;
-   private Integer width;
-   private Integer height;
+   private Integer x = 0;
+   private Integer y = 0;
+   private Integer width = 0;
+   private Integer height = 0;
    private String filename;
-   private Integer play_count;
+   private Integer play_count = 1;
 
    public String toVideoString(){
       String str = "";

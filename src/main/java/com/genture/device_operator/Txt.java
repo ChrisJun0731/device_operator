@@ -3,19 +3,19 @@ package com.genture.device_operator;
  * Created by zhuj@genture.com on 2017/07/06.
  */
 public class Txt {
-   private Integer x;
-   private Integer y;
-   private Integer font;
-   private Integer font_size;
-   private Integer foreground_color;
-   private Integer background_color;
-   private Integer twinkle;
-   private String content;
-   private Integer width;
-   private Integer height;
-   private Integer font_style;
-   private Integer char_space;
-   private Integer queue_mode;
+   private Integer x = 0;
+   private Integer y = 0;
+   private Integer font = 1;
+   private Integer font_size = 1616;
+   private Integer foreground_color = 1;
+   private Integer background_color = 8;
+   private Integer twinkle = 0;
+   private String content = "";
+   private Integer width = 0;
+   private Integer height = 0;
+   private Integer font_style = 0;
+   private Integer char_space = 0;
+   private Integer queue_mode = 0;
 
    public String toTxtString(){
       String txt = "";

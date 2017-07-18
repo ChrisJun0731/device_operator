@@ -39,7 +39,7 @@ class DataFrame {
 
     /**
 
-     * ¸ù¾İÖ¸ÁîÂëºÍÊı¾İÓòÀ´´´½¨Êı¾İÖ¡
+     * æ ¹æ®æŒ‡ä»¤ç å’Œæ•°æ®åŸŸæ¥åˆ›å»ºæ•°æ®å¸§
      * @param cmd
      * @param data
      * @return
@@ -69,7 +69,7 @@ class DataFrame {
     }
 
     /**
-     * µÃµ½Ğ£ÑéÂëµÄ×Ö½ÚÊı×é
+     * å¾—åˆ°æ ¡éªŒç çš„å­—èŠ‚æ•°ç»„
      * @param data_frame_no_crc
      * @return
      */
@@ -81,7 +81,7 @@ class DataFrame {
     }
 
     /**
-     * ¼ÆËãCRCĞ£ÑéÂëµÄÖµ
+     * è®¡ç®—CRCæ ¡éªŒç çš„å€¼
      * @param dataFrame
      * @param len
      * @return
@@ -95,7 +95,7 @@ class DataFrame {
     }
 
     /**
-     * ¶ÔÊı¾İÓòµÄÄÚÈİ½øĞĞ×ªÒå
+     * å¯¹æ•°æ®åŸŸçš„å†…å®¹è¿›è¡Œè½¬ä¹‰
      * @param data
      * @return
      */

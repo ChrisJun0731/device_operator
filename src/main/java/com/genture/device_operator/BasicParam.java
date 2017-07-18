@@ -12,6 +12,16 @@ public class BasicParam {
     private String upp_com_ip;
     private String report;
 
+    {
+        screen_number = "1";
+        ip = "192.168.0.2";
+        port = "5000";
+        subnet_mask = "255.255.255.0";
+        gateway = "192.168.0.1";
+        upp_com_ip = "192.168.0.3";
+        report = "0";
+    }
+
     public String getScreen_number() {
         return screen_number;
     }

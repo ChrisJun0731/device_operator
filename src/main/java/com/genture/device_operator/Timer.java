@@ -1,29 +1,31 @@
 package com.genture.device_operator;
+
+
 /**
  * Created by zhuj@genture.com on 2017/07/06.
  */
 public class Timer {
-   private Integer x;
-   private Integer y;
-   private Integer width;
-   private Integer height;
-   private Integer play_time;
-   private Integer foreground_color;
-   private Integer background_color;
-   private Integer font_size;
-   private Integer font;
-   private Integer font_style;
-   private Integer full_year;
-   private Integer date_format;
-   private Integer year;
-   private Integer month;
-   private Integer day;
-   private Integer hour;
-   private Integer minute;
-   private Integer second;
-   private Integer week;
-   private Integer single_line;
-   private Integer play_count;
+   private Integer x = 0;
+   private Integer y = 0;
+   private Integer width = 0;
+   private Integer height = 0;
+   private Integer play_time = 100;
+   private Integer foreground_color = 1;
+   private Integer background_color = 8;
+   private Integer font_size = 1616;
+   private Integer font = 1;
+   private Integer font_style = 0;
+   private Integer full_year = 1;
+   private Integer date_format = 0;
+   private Integer year = 1;
+   private Integer month = 1;
+   private Integer day = 1;
+   private Integer hour = 1;
+   private Integer minute = 1;
+   private Integer second = 1;
+   private Integer week = 1;
+   private Integer single_line = 1;
+   private Integer play_count = 1;
 
    public String toTimerString(){
       String str = "";

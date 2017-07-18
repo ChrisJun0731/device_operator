@@ -4,13 +4,13 @@ package com.genture.device_operator;
  * Created by zhuj@genture.com on 2017/07/06.
  */
 public class Img {
-   private Integer x;
-   private Integer y;
+   private Integer x = 0;
+   private Integer y = 0;
    private String filename;
-   private Integer twinkle;
-   private Integer width;
-   private Integer height;
-   private Integer stayTime;
+   private Integer twinkle = 0;
+   private Integer width = 0;
+   private Integer height = 0;
+   private Integer stayTime = 100;
 
    public String toImgStr(){
       String str = "";

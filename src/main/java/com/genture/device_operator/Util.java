@@ -17,7 +17,7 @@ class Util {
 	private static Logger logger = Logger.getLogger(Util.class);
 
 	/**
-	 * ½«Ò»¸ö°´buf´æ´¢µÄÕûÊı×ª»¯Îªint
+	 * å°†ä¸€ä¸ªæŒ‰bufå­˜å‚¨çš„æ•´æ•°è½¬åŒ–ä¸ºint
 	 * @param low
 	 * @param high
 	 * @return
@@ -29,7 +29,7 @@ class Util {
 	}
 
 	/**
-	 * ½«Ò»¸öÎª¸ºÖµµÄbyte×ª»¯ÎªÆäÖÜÆÚÄÚ¶ÔÓ¦µÄÕıÊı
+	 * å°†ä¸€ä¸ªä¸ºè´Ÿå€¼çš„byteè½¬åŒ–ä¸ºå…¶å‘¨æœŸå†…å¯¹åº”çš„æ­£æ•°
 	 * @param num
 	 * @return
 	 */
@@ -38,7 +38,7 @@ class Util {
 	}
 
 	/**
-	 * ½«Ò»¸öÕûÊı°´¸ßµÍÎ»´æ´¢
+	 * å°†ä¸€ä¸ªæ•´æ•°æŒ‰é«˜ä½ä½å­˜å‚¨
 	 * @param result
 	 * @param crc
 	 * @param index
@@ -49,7 +49,7 @@ class Util {
 	}
 
 	/**
-	 * »¹Ô­×ªÒåºóµÄÊı¾İÁ÷
+	 * è¿˜åŸè½¬ä¹‰åçš„æ•°æ®æµ
 	 * @param data
 	 * @return
 	 */
@@ -88,21 +88,25 @@ class Util {
 	}
 
 	/**
-	 * ½«ipµÄ×Ö·û´®×ª»»ÎªbyteÊı¾İ
+	 * å°†ipçš„å­—ç¬¦ä¸²è½¬æ¢ä¸ºbyteæ•°æ®
 	 * @param ip
 	 * @return
 	 */
 	public byte[] ip2byte(String ip){
-		String[] array = ip.split(".");
+		String[] array = ip.split("\\.");
+		int[] middle = new int[array.length];
+		for(int i=0; i<array.length; i++){
+			middle[i] = Integer.parseInt(array[i]);
+		}
 		byte[] result = new byte[array.length];
 		for(int i=0; i<array.length; i++){
-			result[i] = Byte.parseByte(array[i]);
+			result[i] = (byte)middle[i];
 		}
 		return result;
 	}
 
 	/**
-	 * ½«byteÊı×é×ª»»ÎªipµØÖ·µÄ×Ö·û´®ĞÎÊ½
+	 * å°†byteæ•°ç»„è½¬æ¢ä¸ºipåœ°å€çš„å­—ç¬¦ä¸²å½¢å¼
 	 * @param ip
 	 * @return
 	 */
@@ -113,7 +117,7 @@ class Util {
 	}
 
 	/**
-	 * ´´½¨ÁÙÊ±ÎÄ¼ş£¬ÓÃÀ´Ğ´Èë½ØÆÁÍ¼Æ¬Á÷
+	 * åˆ›å»ºä¸´æ—¶æ–‡ä»¶ï¼Œç”¨æ¥å†™å…¥æˆªå±å›¾ç‰‡æµ
 	 */
 	public File createTempFile(){
 		String path = "E:/capture";

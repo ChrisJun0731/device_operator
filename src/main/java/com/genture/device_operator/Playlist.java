@@ -22,8 +22,8 @@ public class Playlist {
 	}
 
 	/**
-	 * 获得播放列表的字符串
-	 * @return 播放列表的字符串
+	 * 鑾峰緱鎾斁鍒楄〃鐨勫瓧绗︿覆
+	 * @return 鎾斁鍒楄〃鐨勫瓧绗︿覆
 	 */
 	public String toPlayListString(){
 		String prefix = "[all]\n"+ "items=" + this.num + "\n";
@@ -44,8 +44,8 @@ public class Playlist {
 	}
 
 	/**
-	 * 创建播放列表文件
-	 * @return 播放列表文件
+	 * 鍒涘缓鎾斁鍒楄〃鏂囦欢
+	 * @return 鎾斁鍒楄〃鏂囦欢
 	 */
 	public File createPlayListFile(){
 		String playlist_str = toPlayListString();
@@ -73,7 +73,7 @@ public class Playlist {
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			bufferedWriter.write(playlist_str);
 			bufferedWriter.flush();
-			logger.info("创建播放列表"+filename+"成功!");
+			logger.info("鍒涘缓鎾斁鍒楄〃"+filename+"鎴愬姛!");
 		}
 		catch(Exception e){
 			e.printStackTrace();

@@ -1,9 +1,7 @@
 package com.genture.device_operator;
-/***********************************************************************
- * Module:  Item.java
- * Author:  Administrator
- * Purpose: Defines the Class Item
- ***********************************************************************/
+/**
+ * Created by zhuj@genture.com on 2017/07/06.
+ */
 
 import org.apache.log4j.Logger;
 
@@ -13,13 +11,13 @@ import java.util.List;
 public class Item {
     Logger logger = Logger.getLogger(Item.class);
 
-    private Long stayTime;
-    private Integer inStyle;
-    private Integer outStyle;
-    private Integer inSpeed;
-    private Integer twinkle_speed;
-    private Integer twinkle_count;
-    private Integer play_count;
+    private Long stayTime = 100L;
+    private Integer inStyle = 1;
+    private Integer outStyle = 1;
+    private Integer inSpeed = 1;
+    private Integer twinkle_speed = 0;
+    private Integer twinkle_count =5;
+    private Integer play_count = 1;
     private int gif_num;
     private int video_num;
     private int GIF_NUM_RESTRICT = 2;
@@ -68,7 +66,7 @@ public class Item {
             else if(displayList.get(i) instanceof Timer){
                 Timer timer = (Timer)displayList.get(i);
                 timer_num++;
-                item_str[i] = "timer" + timer_num + "=" + timer.toTimerString();
+                item_str[i] = "time" + timer_num + "=" + timer.toTimerString();
             }
             else if(displayList.get(i) instanceof Video){
                 Video video = (Video)displayList.get(i);
@@ -99,7 +97,7 @@ public class Item {
     public void addGif(Gif gif){
         gif_num++;
         if(gif_num >= GIF_NUM_RESTRICT){
-            logger.error("Ã¿¸öitemÄÜÉÏ´«µÄgif²»ÄÜ³¬¹ý2¸ö£¡");
+            logger.error("Ã¿ï¿½ï¿½itemï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½gifï¿½ï¿½ï¿½Ü³ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½");
             return;
         }
         displayList.add(gif);
@@ -112,7 +110,7 @@ public class Item {
     public void addVideo(Video video){
         video_num++;
         if(video_num >= VIDEO_NUM_RESTRICT){
-            logger.error("Ã¿¸öitemÉÏ´«µÄgif²»ÄÜ³¬¹ý2¸ö£¡");
+            logger.error("Ã¿ï¿½ï¿½itemï¿½Ï´ï¿½ï¿½ï¿½gifï¿½ï¿½ï¿½Ü³ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½");
             return;
         }
         displayList.add(video);
