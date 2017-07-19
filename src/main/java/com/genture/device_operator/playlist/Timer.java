@@ -33,10 +33,11 @@ public class Timer {
       String str = "";
       str = x + "," + y + "," + width + "," + height + "," + play_time + "," + (foreground_color.ordinal()+1)
               + "," + (background_color.ordinal()+1) + "," + font_size + "," + (font.ordinal()+1) + ","
-              + font_style.ordinal() + "," + full_year_display.ordinal() + "," + date_format.ordinal() + ","
-              + year_display.ordinal() + "," + month_display.ordinal() + "," + day_display.ordinal() + ","
-              + hour_display.ordinal() + "," + minute_display.ordinal() + "," + second_display.ordinal() + ","
-              + week_display.ordinal() + "," + single_line.ordinal() + "," + play_count + "\n";
+              + (font_style.name()=="LINE_THROUGH"? 8:font_style.ordinal()) + "," + full_year_display.ordinal() + ","
+              + date_format.ordinal() + "," + year_display.ordinal() + "," + month_display.ordinal() + ","
+              + day_display.ordinal() + "," + hour_display.ordinal() + "," + minute_display.ordinal() + ","
+              + second_display.ordinal() + "," + week_display.ordinal() + "," + single_line.ordinal() + ","
+              + play_count + "\n";
       return str;
    }
 

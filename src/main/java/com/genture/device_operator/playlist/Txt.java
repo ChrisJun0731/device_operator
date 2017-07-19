@@ -29,7 +29,8 @@ public class Txt{
       String txt = "";
       txt += x + "," + y + "," + (font.ordinal()+1) + "," + font_size + "," + (foreground_color.ordinal()+1)
               + "," + (background_color.ordinal()+1) + "," + twinkle + "," + util.convertText(content)
-              + "," + width + "," + height + "," + font_style.ordinal() + "\n";
+              + "," + width + "," + height + ","
+              + (font_style.name()=="LINE_THROUGH"?8: font_style.ordinal()) + "\n";
       return txt;
    }
 

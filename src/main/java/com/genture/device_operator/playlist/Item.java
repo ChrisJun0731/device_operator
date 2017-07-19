@@ -77,7 +77,7 @@ public class Item {
                 item_str[i] = "video" + video_num + "=" + video.toVideoString();
             }
             else if(displayList.get(i) instanceof Txtext){
-                Txtext txtext = new Txtext();
+                Txtext txtext = (Txtext)displayList.get(i);
                 txtext_num++;
                 item_str[i] = "txtext" + txtext_num + "=" + txtext.toTxtextString();
             }

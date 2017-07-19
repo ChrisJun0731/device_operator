@@ -11,7 +11,7 @@ public class Txtext {
    private Integer width = 0;
    private Integer height = 0;
    private Font font = Font.BLACK;
-   private Integer font_size;
+   private Integer font_size = 1616;
    private Fontstyle font_style = Fontstyle.NORMAL;
    private Align horizontal_align = Align.LEFT;
    private Align vertical_align = Align.LEFT;
@@ -29,10 +29,10 @@ public class Txtext {
 
    public String toTxtextString(){
       String str = "";
-      str += x+ "," + y+ "," + width+ "," + height + "," + font + "," + font_size + ","
-              + font_style.ordinal() + "," + horizontal_align.ordinal() + ","+ vertical_align.ordinal()
-              + "," + line_space + "," + char_space + "," + (foreground_color.ordinal()+1) + "," +
-              (background_color.ordinal()+1) + "," + (specialEffect.name()=="Random"?255: specialEffect.ordinal())
+      str += x+ "," + y+ "," + width+ "," + height + "," + (font.ordinal()+1) + "," + font_size + ","
+              + (font_style.name()=="LINE_THROUGH"? 8: font_style.ordinal()) + "," + horizontal_align.ordinal() + ","
+              + vertical_align.ordinal() + "," + line_space + "," + char_space + "," + (foreground_color.ordinal()+1)
+              + "," + (background_color.ordinal()+1) + "," + (specialEffect.name()=="Random"?255: specialEffect.ordinal())
               + "," + specialEffectSpeed.ordinal() + "," + play_time + "," + play_count + ","
               + util.convertText(content) + "\n";
       return str;
@@ -110,14 +110,6 @@ public class Txtext {
       this.play_count = play_count;
    }
 
-   public String getContent() {
-      return content;
-   }
-
-   public void setContent(String content) {
-      this.content = content;
-   }
-
    public Font getFont() {
       return font;
    }
@@ -180,5 +172,13 @@ public class Txtext {
 
    public void setSpecialEffectSpeed(SpecialEffectSpeed specialEffectSpeed) {
       this.specialEffectSpeed = specialEffectSpeed;
+   }
+
+   public String getContent() {
+      return content;
+   }
+
+   public void setContent(String content) {
+      this.content = content;
    }
 }
