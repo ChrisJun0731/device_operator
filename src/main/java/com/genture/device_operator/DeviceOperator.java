@@ -1,10 +1,9 @@
 package com.genture.device_operator;
 
+import com.genture.device_operator.playlist.params.BasicParam;
 import org.apache.log4j.Logger;
 
 import java.io.*;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by zhuj@genture.com on 2017/6/7.
@@ -160,7 +159,7 @@ public class DeviceOperator {
                     result = this.tcpClient.receive();
                     try_times++;
                 }
-                if(try_times>=10){
+                if(try_times>=50){
                     logger.error("数据块"+block_num+"发送失败！请检查网络是否连通，程序终止！");
                     return;
                 }

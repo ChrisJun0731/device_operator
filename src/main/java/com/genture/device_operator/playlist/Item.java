@@ -1,8 +1,11 @@
-package com.genture.device_operator;
+package com.genture.device_operator.playlist;
 /**
  * Created by zhuj@genture.com on 2017/07/06.
  */
 
+import com.genture.device_operator.playlist.params.InOutScreenMode;
+import com.genture.device_operator.playlist.params.InSpeed;
+import com.genture.device_operator.playlist.params.TwinkleSpeed;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -12,10 +15,10 @@ public class Item {
     Logger logger = Logger.getLogger(Item.class);
 
     private Long stayTime = 100L;
-    private Integer inStyle = 1;
-    private Integer outStyle = 1;
-    private Integer inSpeed = 1;
-    private Integer twinkle_speed = 0;
+    private InOutScreenMode inScreenMode = InOutScreenMode.IMMEDIATELY;
+    private InOutScreenMode outScreenMode = InOutScreenMode.IMMEDIATELY;
+    private InSpeed inSpeed = InSpeed.ONE;
+    private TwinkleSpeed twinkle_speed = TwinkleSpeed.ZERO;
     private Integer twinkle_count =5;
     private Integer play_count = 1;
     private int gif_num;
@@ -30,10 +33,10 @@ public class Item {
 
     public String toParamString(){
         String str = "";
-        str += (stayTime== null? "": stayTime) + "," + (inStyle== null? "": inStyle) + "," +
-                (outStyle== null? "": outStyle) + "," + (inSpeed== null? "": inSpeed) + "," +
-                (twinkle_speed== null? "": twinkle_speed) + "," + (twinkle_count== null? "": twinkle_count)+ "," +
-                (play_count== null? "": play_count) + "\n";
+        str += stayTime + "," + (inScreenMode.ordinal()+1) + ","
+                + (outScreenMode.ordinal()+1) + "," + (inSpeed.ordinal()+1)
+                + "," + twinkle_speed.ordinal() + "," + twinkle_count+ "," +
+                play_count + "\n";
         return str;
     }
 
@@ -97,7 +100,7 @@ public class Item {
     public void addGif(Gif gif){
         gif_num++;
         if(gif_num >= GIF_NUM_RESTRICT){
-            logger.error("ÿ��item���ϴ���gif���ܳ���2����");
+            logger.error("每个Item上gif的数量不能超过两个！");
             return;
         }
         displayList.add(gif);
@@ -110,7 +113,7 @@ public class Item {
     public void addVideo(Video video){
         video_num++;
         if(video_num >= VIDEO_NUM_RESTRICT){
-            logger.error("ÿ��item�ϴ���gif���ܳ���2����");
+            logger.error("每个Item上的视频文件不能超过两个！");
             return;
         }
         displayList.add(video);
@@ -132,35 +135,35 @@ public class Item {
         this.stayTime = stayTime;
     }
 
-    public int getInStyle() {
-        return inStyle;
+    public InOutScreenMode getInScreenMode() {
+        return inScreenMode;
     }
 
-    public void setInStyle(int inStyle) {
-        this.inStyle = inStyle;
+    public void setInScreenMode(InOutScreenMode inScreenMode) {
+        this.inScreenMode = inScreenMode;
     }
 
-    public int getOutStyle() {
-        return outStyle;
+    public InOutScreenMode getOutScreenMode() {
+        return outScreenMode;
     }
 
-    public void setOutStyle(int outStyle) {
-        this.outStyle = outStyle;
+    public void setOutScreenMode(InOutScreenMode outScreenMode) {
+        this.outScreenMode = outScreenMode;
     }
 
-    public int getInSpeed() {
+    public InSpeed getInSpeed() {
         return inSpeed;
     }
 
-    public void setInSpeed(int inSpeed) {
+    public void setInSpeed(InSpeed inSpeed) {
         this.inSpeed = inSpeed;
     }
 
-    public Integer getTwinkle_speed() {
+    public TwinkleSpeed getTwinkle_speed() {
         return twinkle_speed;
     }
 
-    public void setTwinkle_speed(Integer twinkle_speed) {
+    public void setTwinkle_speed(TwinkleSpeed twinkle_speed) {
         this.twinkle_speed = twinkle_speed;
     }
 

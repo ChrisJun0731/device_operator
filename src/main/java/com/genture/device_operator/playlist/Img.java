@@ -1,4 +1,4 @@
-package com.genture.device_operator;
+package com.genture.device_operator.playlist;
 
 /**
  * Created by zhuj@genture.com on 2017/07/06.
@@ -6,7 +6,7 @@ package com.genture.device_operator;
 public class Img {
    private Integer x = 0;
    private Integer y = 0;
-   private String filename;
+   private String filename = "";
    private Integer twinkle = 0;
    private Integer width = 0;
    private Integer height = 0;
@@ -14,14 +14,14 @@ public class Img {
 
    public String toImgStr(){
       String str = "";
-      str = (x== null? "":x)+ "," + (y== null? "": y) + "," + (filename== null? "":filename)+ "," + (twinkle== null? "": twinkle)
-      + "," + (width== null? "": width) + "," + (height== null? "": height) + "\n";
+      str = x+ "," + y + "," + filename+ "," + twinkle + "," + width
+              + "," + height + "\n";
       return str;
    }
 
    public String toImgParamStr(){
       String str = "";
-      str += (stayTime== null? "": stayTime)+"\n";
+      str += stayTime + "\n";
       return str;
    }
 

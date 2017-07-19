@@ -1,4 +1,4 @@
-package com.genture.device_operator;
+package com.genture.device_operator.playlist;
 
 import org.apache.log4j.Logger;
 

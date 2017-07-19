@@ -1,24 +1,21 @@
-package com.genture.device_operator;
-
+package com.genture.device_operator.playlist;
 /**
  * Created by zhuj@genture.com on 2017/07/06.
  */
-public class Gif {
+public class Video {
    private Integer x = 0;
    private Integer y = 0;
    private Integer width = 0;
    private Integer height = 0;
-   private String filename;
-   private Integer play_time = 100;
+   private String filename = "";
    private Integer play_count = 1;
-   private Integer background_color = 8;
 
-   public String toGifString(){
-      String gif_str = "";
-      gif_str += (x== null? "": x) + "," + (y== null? "": y) + "," + (width== null? "":width)+ ","
-      + (height== null? "": height)+ "," + (filename== null? "": filename) + "," + (play_time== null? "": play_time)
-              +"," + (play_count== null? "": play_count) + "," + (background_color== null? "": background_color)+ "\n";
-      return gif_str;
+   public String toVideoString(){
+      String str = "";
+      str += (x== null? "": x) + "," + (y== null? "": y) + "," + (width== null? "": width) + "," +
+              (height== null? "": height) + "," + (filename== null? "": filename) + "," +
+              (play_count== null? "": play_count)+ "\n";
+      return str;
    }
 
    public int getX() {
@@ -61,27 +58,11 @@ public class Gif {
       this.filename = filename;
    }
 
-   public int getPlay_time() {
-      return play_time;
-   }
-
-   public void setPlay_time(int play_time) {
-      this.play_time = play_time;
-   }
-
    public int getPlay_count() {
       return play_count;
    }
 
    public void setPlay_count(int play_count) {
       this.play_count = play_count;
-   }
-
-   public int getBackground_color() {
-      return background_color;
-   }
-
-   public void setBackground_color(int background_color) {
-      this.background_color = background_color;
    }
 }
