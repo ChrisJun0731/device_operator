@@ -25,7 +25,7 @@ public class Txt{
 
    private Util util = new Util();
 
-   public String toTxtString(){
+   String toTxtString(){
       String txt = "";
       txt += x + "," + y + "," + (font.ordinal()+1) + "," + font_size + "," + (foreground_color.ordinal()+1)
               + "," + (background_color.ordinal()+1) + "," + twinkle + "," + util.convertText(content)
@@ -34,7 +34,7 @@ public class Txt{
       return txt;
    }
 
-   public String toTxtParamString(){
+   String toTxtParamString(){
       String str = char_space + "," + queue_mode.ordinal() + "\n";
       return str;
    }
@@ -79,18 +79,18 @@ public class Txt{
       this.background_color = background_color;
    }
 
-   public int getTwinkle() {
-      return twinkle;
-   }
-
-   public void setTwinkle(int twinkle) {
-      this.twinkle = twinkle;
-   }
-
+   /**
+    * 获得显示的字符内容
+    * @return 字符内容
+    */
    public String getContent() {
       return content;
    }
 
+   /**
+    * 设置要显示的字符内容
+    * @param content
+    */
    public void setContent(String content) {
       this.content = content;
    }
@@ -127,18 +127,34 @@ public class Txt{
       this.font_style = font_style;
    }
 
+   /**
+    * 获得字符间距
+    * @return 字符间距 范围-1000到1000
+    */
    public int getChar_space() {
       return char_space;
    }
 
+   /**
+    * 设置字符间距 范围-1000到1000
+    * @param char_space 字符间距
+    */
    public void setChar_space(int char_space) {
       this.char_space = char_space;
    }
 
+   /**
+    * 获得字符的排列方式
+    * @return 排列方式
+    */
    public QueueMode getQueue_mode() {
       return queue_mode;
    }
 
+   /**
+    * 设置字符的排列方式
+    * @param queue_mode 排列方式
+    */
    public void setQueue_mode(QueueMode queue_mode) {
       this.queue_mode = queue_mode;
    }

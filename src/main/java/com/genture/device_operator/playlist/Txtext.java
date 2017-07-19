@@ -27,7 +27,7 @@ public class Txtext {
 
    private Util util = new Util();
 
-   public String toTxtextString(){
+   String toTxtextString(){
       String str = "";
       str += x+ "," + y+ "," + width+ "," + height + "," + (font.ordinal()+1) + "," + font_size + ","
               + (font_style.name()=="LINE_THROUGH"? 8: font_style.ordinal()) + "," + horizontal_align.ordinal() + ","
@@ -86,10 +86,18 @@ public class Txtext {
       this.char_space = char_space;
    }
 
+   /**
+    * 获得文本内容行间距
+    * @return 行间距
+    */
    public int getLine_space() {
       return line_space;
    }
 
+   /**
+    * 设置文本内容行间距
+    * @param line_space
+    */
    public void setLine_space(int line_space) {
       this.line_space = line_space;
    }
@@ -126,18 +134,34 @@ public class Txtext {
       this.font_style = font_style;
    }
 
+   /**
+    * 获得文本内容水平对齐方式
+    * @return 水平对齐方式
+    */
    public Align getHorizontal_align() {
       return horizontal_align;
    }
 
+   /**
+    * 设置文本内容水平对齐方式
+    * @param horizontal_align 水平对齐方式
+    */
    public void setHorizontal_align(Align horizontal_align) {
       this.horizontal_align = horizontal_align;
    }
 
+   /**
+    * 获得文本内容垂直对齐方式
+    * @return 垂直对齐方式
+    */
    public Align getVertical_align() {
       return vertical_align;
    }
 
+   /**
+    * 设置文本内容垂直对齐方式
+    * @param vertical_align 设置文本内容垂直对齐方式
+    */
    public void setVertical_align(Align vertical_align) {
       this.vertical_align = vertical_align;
    }
@@ -158,26 +182,50 @@ public class Txtext {
       this.background_color = background_color;
    }
 
+   /**
+    * 获得每次播放时的特效类型
+    * @return 特效类型
+    */
    public SpecialEffect getSpecialEffect() {
       return specialEffect;
    }
 
+   /**
+    * 设置每次播放时的特效类型
+    * @param specialEffect 特效类型
+    */
    public void setSpecialEffect(SpecialEffect specialEffect) {
       this.specialEffect = specialEffect;
    }
 
+   /**
+    * 获得特效播放速度
+    * @return 特效播放速度
+    */
    public SpecialEffectSpeed getSpecialEffectSpeed() {
       return specialEffectSpeed;
    }
 
+   /**
+    * 设置特效播放速度
+    * @param specialEffectSpeed 特效播放速度
+    */
    public void setSpecialEffectSpeed(SpecialEffectSpeed specialEffectSpeed) {
       this.specialEffectSpeed = specialEffectSpeed;
    }
 
+   /**
+    * 获得文本内容
+    * @return 文本内容
+    */
    public String getContent() {
       return content;
    }
 
+   /**
+    * 设置文本内容
+    * @param content 文本内容
+    */
    public void setContent(String content) {
       this.content = content;
    }

@@ -31,7 +31,7 @@ public class Item {
         this.displayList = new ArrayList();
     }
 
-    public String toParamString(){
+    String toParamString(){
         String str = "";
         str += stayTime + "," + (inScreenMode.ordinal()+1) + ","
                 + (outScreenMode.ordinal()+1) + "," + (inSpeed.ordinal()+1)
@@ -40,7 +40,7 @@ public class Item {
         return str;
     }
 
-    public String toItemString(){
+    String toItemString(){
         String[] item_str = new String[displayList.size()];
         int gif_num = 0;
         int txt_num = 0;
@@ -89,14 +89,26 @@ public class Item {
         return item_string;
     }
 
+    /**
+     * 删除Item中项（图片、文本，视频）
+     * @param index 项的索引
+     */
     public void removeDisplay(int index){
         displayList.remove(index);
     }
 
+    /**
+     * 向Item中添加图片
+     * @param img 图片
+     */
     public void addImg(Img img){
         displayList.add(img);
     }
 
+    /**
+     * 向Item中添加Gif
+     * @param gif Gif
+     */
     public void addGif(Gif gif){
         gif_num++;
         if(gif_num >= GIF_NUM_RESTRICT){
@@ -106,10 +118,18 @@ public class Item {
         displayList.add(gif);
     }
 
+    /**
+     * 向Item中添加文本
+     * @param txt
+     */
     public void addTxt(Txt txt){
         displayList.add(txt);
     }
 
+    /**
+     * 向Item中添加视频
+     * @param video
+     */
     public void addVideo(Video video){
         video_num++;
         if(video_num >= VIDEO_NUM_RESTRICT){
@@ -119,66 +139,130 @@ public class Item {
         displayList.add(video);
     }
 
+    /**
+     * 向Item中添加Txtext
+     * @param txtext txtext
+     */
     public void addTxtext(Txtext txtext){
         displayList.add(txtext);
     }
 
+    /**
+     * 向Item中添加时间
+     * @param timer
+     */
     public void addTimer(Timer timer){
         displayList.add(timer);
     }
 
+    /**
+     * 获得在屏上的停留时间 单位0.1秒
+     * @return
+     */
     public long getStayTime() {
         return stayTime;
     }
 
+    /**
+     * 设置在屏上的停留时间 单位0.1秒
+     * @param stayTime 停留时间
+     */
     public void setStayTime(long stayTime) {
         this.stayTime = stayTime;
     }
 
+    /**
+     * 获得入屏方式
+     * @return 入屏方式
+     */
     public InOutScreenMode getInScreenMode() {
         return inScreenMode;
     }
 
+    /**
+     * 设置入屏方式
+     * @param inScreenMode 入屏方式
+     */
     public void setInScreenMode(InOutScreenMode inScreenMode) {
         this.inScreenMode = inScreenMode;
     }
 
+    /**
+     * 设获得出屏方式
+     * @return 出屏方式
+     */
     public InOutScreenMode getOutScreenMode() {
         return outScreenMode;
     }
 
+    /**
+     * 设置出屏方式
+     * @param outScreenMode 出屏方式
+     */
     public void setOutScreenMode(InOutScreenMode outScreenMode) {
         this.outScreenMode = outScreenMode;
     }
 
+    /**
+     * 获得入屏速度
+     * @return 入屏速度
+     */
     public InSpeed getInSpeed() {
         return inSpeed;
     }
 
+    /**
+     * 设置入屏速度
+     * @param inSpeed 入屏速度
+     */
     public void setInSpeed(InSpeed inSpeed) {
         this.inSpeed = inSpeed;
     }
 
+    /**
+     * 获得闪烁速度
+     * @return 闪烁速度
+     */
     public TwinkleSpeed getTwinkle_speed() {
         return twinkle_speed;
     }
 
+    /**
+     * 设置闪烁速度
+     * @param twinkle_speed
+     */
     public void setTwinkle_speed(TwinkleSpeed twinkle_speed) {
         this.twinkle_speed = twinkle_speed;
     }
 
+    /**
+     * 获得闪烁次数
+     * @return 闪烁次数
+     */
     public Integer getTwinkle_count() {
         return twinkle_count;
     }
 
+    /**
+     * 设置闪烁次数
+     * @param twinkle_count 闪烁次数
+     */
     public void setTwinkle_count(Integer twinkle_count) {
         this.twinkle_count = twinkle_count;
     }
 
+    /**
+     * 获得播放次数
+     * @return 播放次数
+     */
     public Integer getPlay_count() {
         return play_count;
     }
 
+    /**
+     * 设置播放次数
+     * @param play_count 播放次数
+     */
     public void setPlay_count(Integer play_count) {
         this.play_count = play_count;
     }

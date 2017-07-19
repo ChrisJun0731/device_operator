@@ -25,7 +25,7 @@ public class Playlist {
 	 * 获得播放列表的字符串
 	 * @return 播放列表的字符串
 	 */
-	public String toPlayListString(){
+	String toPlayListString(){
 		String prefix = "[all]\n"+ "items=" + this.num + "\n";
 		String[] items_str = new String[playlist.size()];
 		for(int i=0; i<playlist.size(); i++){
@@ -44,7 +44,7 @@ public class Playlist {
 	}
 
 	/**
-	 * 创建播放列表文件
+	 * 创建播放列表文件 默认路径E:\temp\playlist
 	 * @return 播放列表文件
 	 */
 	public File createPlayListFile(){
@@ -81,21 +81,29 @@ public class Playlist {
 		return file;
 	}
 
+	/**
+	 * 向播放列表中添加Item
+	 * @param item item
+	 */
 	public void addItem(Item item){
 		this.playlist.add(item);
 		this.num++;
 	}
 
+	/**
+	 * 从播放列表中移除Item
+	 * @param index item索引
+	 */
 	public void removeItem(int index){
 		this.playlist.remove(index);
 		this.num--;
 	}
 
-	public int getNum() {
+	int getNum() {
 		return num;
 	}
 
-	public void setNum(int num) {
+	void setNum(int num) {
 		this.num = num;
 	}
 }

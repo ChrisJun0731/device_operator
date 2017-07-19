@@ -1,8 +1,8 @@
 package com.genture.device_operator.playlist.params;
 
 /**
- * Created by Administrator on 2017/7/19.
+ * Created by zhuj@genture.com on 2017/7/19.
  */
 public enum Font {
-	BLACK, KAI, SONG, FANGSONG, LISHU
+	BLACK, KAITI, SONGTI, FANGSONG, LISHU
 }
