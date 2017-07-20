@@ -119,9 +119,8 @@ class Util {
 	/**
 	 * 创建临时文件，用来写入截屏图片流
 	 */
-	public File createTempFile(){
-		String path = "E:/capture";
-		File directory = new File(path);
+	public File createTempFile(String capturePath){
+		File directory = new File(capturePath);
 		if(!directory.exists()){
 			directory.mkdir();
 		}

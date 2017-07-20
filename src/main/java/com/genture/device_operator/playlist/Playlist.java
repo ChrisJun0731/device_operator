@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/7/4.
+ * Created by zhuj@genture.com on 2017/7/4.
  */
 public class Playlist {
 	private static Logger logger = Logger.getLogger(Playlist.class);
 
 	private List<Item> playlist;
 	private int num;
+	private String tempPlaylistPath = "E:\\temp\\playlist";
 
 	{
 		this.playlist = new ArrayList();
@@ -44,19 +45,18 @@ public class Playlist {
 	}
 
 	/**
-	 * 创建播放列表文件 默认路径E:\temp\playlist
+	 * 创建临时播放列表文件 默认路径E:\temp\playlist
 	 * @return 播放列表文件
 	 */
 	public File createPlayListFile(){
 		String playlist_str = toPlayListString();
 		int i = 1;
-		String path = "E:\\temp\\playlist";
-		File dir = new File(path);
+		File dir = new File(tempPlaylistPath);
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
 		String filename = "play00"+ i +".lst";
-		File file = new File(path ,filename);
+		File file = new File(tempPlaylistPath ,filename);
 		while(file.exists() && i<=100){
 			i++;
 			if(i>1 & i<10)
@@ -65,7 +65,7 @@ public class Playlist {
 				filename = "play0" + i + ".lst";
 			else
 				filename = "play" + i + ".lst";
-			file = new File(path, filename);
+			file = new File(tempPlaylistPath, filename);
 		}
 		try{
 			file.createNewFile();
@@ -105,5 +105,21 @@ public class Playlist {
 
 	void setNum(int num) {
 		this.num = num;
+	}
+
+	/**
+	 * 获得临时播放列表文件路径
+	 * @return 临时播放列表文件路径
+	 */
+	public String getTempPlaylistPath() {
+		return tempPlaylistPath;
+	}
+
+	/**
+	 * 设置临时播放列表文件路径
+	 * @param tempPlaylistPath 临时播放列表文件路径
+	 */
+	public void setTempPlaylistPath(String tempPlaylistPath) {
+		this.tempPlaylistPath = tempPlaylistPath;
 	}
 }

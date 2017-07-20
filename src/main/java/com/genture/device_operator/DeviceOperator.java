@@ -20,6 +20,7 @@ public class DeviceOperator {
     private final int Block_Size = 5*1024;
     //块的大小对应的帧数据中存储方式
     private final byte[] Block_Size_Buf = new byte[2];
+    private String capturePath = "E:\\capture";
 
     {
         this.util.int2buf(Block_Size, Block_Size_Buf, 0);
@@ -472,10 +473,10 @@ public class DeviceOperator {
     }
 
     /**
-     * 获取屏幕截图
+     * 获取屏幕截图  默认的截图位置E:\\capture
      */
     public void captureScreen(){
-        File file = util.createTempFile();
+        File file = util.createTempFile(capturePath);
         FileOutputStream fos = null;
         try{
             fos = new FileOutputStream(file);
@@ -576,6 +577,22 @@ public class DeviceOperator {
      */
     public void disconnect(){
         this.tcpClient.close();
+    }
+
+    /**
+     * 获得截屏文件存放路径
+     * @return 截屏文件路径
+     */
+    public String getCapturePath() {
+        return capturePath;
+    }
+
+    /**
+     * 设置截图文件路径
+     * @param capturePath 截屏文件路径
+     */
+    public void setCapturePath(String capturePath) {
+        this.capturePath = capturePath;
     }
 
     /**
