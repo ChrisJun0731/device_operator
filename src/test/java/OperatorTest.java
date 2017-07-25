@@ -1,9 +1,12 @@
 
 import com.genture.device_operator.*;
+import com.genture.device_operator.playlist.*;
+import com.genture.device_operator.playlist.params.*;
 import org.junit.*;
 import org.junit.Test;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 /**
  * Created by Administrator on 2017/6/13.
@@ -88,7 +91,8 @@ public class OperatorTest {
 //		String filePath = "C:\\Users\\Administrator\\Desktop\\新建文本文档.lst";
 //		String filePath = "C:\\Users\\Administrator\\Desktop\\诺瓦交通协议标准版 V3.2.0\\金晓交通通信协议.doc";
 //		String filePath = "C:\\Users\\Administrator\\Desktop\\诺瓦交通协议标准版 V3.2.0\\jar包接口测试用例.doc";
-		String filePath = "F:\\pics\\cf.wmv2";
+//		String filePath = "F:\\pics\\3.avi";
+		String filePath = "F:\\pics\\huluwa.gif";
 		deviceOperator.sendFile(filePath);
 	}
 
@@ -143,17 +147,16 @@ public class OperatorTest {
 		Txt txt = new Txt();
 		txt.setX(0);
 		txt.setY(0);
-		txt.setFont(1);
+		txt.setFont(Font.KAITI);
 		txt.setFont_size(1616);
-		txt.setForeground_color(2);
-		txt.setBackground_color(8);
-		txt.setTwinkle(0);
-		txt.setContent("省略属性测试");
+		txt.setForeground_color(Color.GREEN);
+		txt.setBackground_color(Color.BLACK);
+		txt.setContent("文本测试,包含\\逗号等符号?这=些符号需要被转义");
 		txt.setWidth(0);
 		txt.setHeight(0);
-		txt.setFont_style(1);
+		txt.setFont_style(Fontstyle.NORMAL);
 		txt.setChar_space(0);
-		txt.setQueue_mode(0);
+		txt.setQueue_mode(QueueMode.HORIZONTAL);
 
 		Img img = new Img();
 		img.setX(0);
@@ -161,44 +164,44 @@ public class OperatorTest {
 		img.setWidth(0);
 		img.setHeight(0);
 		img.setStayTime(10);
-		img.setTwinkle(0);
 		img.setFilename("timg.jpg");
 
 		Timer timer = new Timer();
 
 
 		Txtext txtext = new Txtext();
-		txtext.setFile_content("测试txtext");
+		txtext.setContent("测试txtext");
 
 		Video video = new Video();
-		video.setFilename("1.avi");
+		video.setFilename("3.avi");
 
 		Gif gif = new Gif();
 		gif.setX(0);
 		gif.setY(0);
 		gif.setHeight(0);
 		gif.setWidth(0);
-		gif.setBackground_color(8);
+		gif.setBackground_color(Color.BLACK);
 		gif.setPlay_count(3);
 		gif.setPlay_time(100);
 		gif.setFilename("huluwa.gif");
 
 
 		Item item1 = new Item();
-		item1.setStayTime(100);
-		item1.setInStyle(1);
-		item1.setOutStyle(1);
-		item1.setInSpeed(1);
-		item1.setTwinkle_speed(0);
-		item1.setTwinkle_count(5);
+//		item1.setStayTime(100);
+//		item1.setInScreenMode(InOutScreenMode.IMMEDIATELY);
+//		item1.setOutScreenMode(InOutScreenMode.IMMEDIATELY);
+//		item1.setInSpeed(InSpeed.ONE);
+//		item1.setTwinkle_speed(TwinkleSpeed.ONE);
+//		item1.setTwinkle_count(5);
 
-		item1.setPlay_count(1);
+//		item1.setPlay_count(1);
 
 //		item1.addTxt(txt);
 //		item1.addTimer(timer);
-		item1.addGif(gif);
+//		item1.addGif(gif);
 //		item1.addImg(img);
 //		item1.addVideo(video);
+		item1.addTxtext(txtext);
 //
 //		Item item2 = new Item();
 //		item2.addTxt(txt);

@@ -89,7 +89,7 @@ public class Txt{
 
    /**
     * 设置要显示的字符内容
-    * @param content
+    * @param content 字符内容
     */
    public void setContent(String content) {
       this.content = content;

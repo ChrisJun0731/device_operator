@@ -96,7 +96,7 @@ public class Txtext {
 
    /**
     * 设置文本内容行间距
-    * @param line_space
+    * @param line_space 行间距
     */
    public void setLine_space(int line_space) {
       this.line_space = line_space;

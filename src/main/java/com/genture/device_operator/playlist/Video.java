@@ -68,7 +68,7 @@ public class Video {
 
    /**
     * 获得视频播放次数
-    * @return
+    * @return 播放次数
     */
    public int getPlay_count() {
       return play_count;
@@ -76,7 +76,7 @@ public class Video {
 
    /**
     * 设置视频播放次数
-    * @param play_count
+    * @param play_count 播放次数
     */
    public void setPlay_count(int play_count) {
       this.play_count = play_count;

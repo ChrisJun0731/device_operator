@@ -120,7 +120,7 @@ public class Item {
 
     /**
      * 向Item中添加文本
-     * @param txt
+     * @param txt txt对象
      */
     public void addTxt(Txt txt){
         displayList.add(txt);
@@ -128,7 +128,7 @@ public class Item {
 
     /**
      * 向Item中添加视频
-     * @param video
+     * @param video video对象
      */
     public void addVideo(Video video){
         video_num++;
@@ -149,7 +149,7 @@ public class Item {
 
     /**
      * 向Item中添加时间
-     * @param timer
+     * @param timer timer对象
      */
     public void addTimer(Timer timer){
         displayList.add(timer);
@@ -157,7 +157,7 @@ public class Item {
 
     /**
      * 获得在屏上的停留时间 单位0.1秒
-     * @return
+     * @return 停留时间
      */
     public long getStayTime() {
         return stayTime;
@@ -229,7 +229,7 @@ public class Item {
 
     /**
      * 设置闪烁速度
-     * @param twinkle_speed
+     * @param twinkle_speed 闪烁速度
      */
     public void setTwinkle_speed(TwinkleSpeed twinkle_speed) {
         this.twinkle_speed = twinkle_speed;

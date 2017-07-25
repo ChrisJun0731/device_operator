@@ -112,7 +112,7 @@ public class Gif {
 
    /**
     * 设置Gif的播放时长(单位0.1秒)
-    * @param play_time
+    * @param play_time 播放时长
     */
    public void setPlay_time(int play_time) {
       this.play_time = play_time;
@@ -128,7 +128,7 @@ public class Gif {
 
    /**
     * 设置Gif的播放次数 范围1-255
-    * @param play_count
+    * @param play_count 播放次数
     */
    public void setPlay_count(int play_count) {
       this.play_count = play_count;

@@ -4,10 +4,7 @@ import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by zhuj@genture.com on 2017/6/15.
@@ -125,9 +122,10 @@ class Util {
 			directory.mkdir();
 		}
 		String filename = "";
-		filename = Calendar.YEAR + "" + Calendar.MONTH + "" + Calendar.DAY_OF_MONTH + ""
-				+ Calendar.HOUR  + "" + Calendar.MINUTE + "" + Calendar.SECOND
-				+ "" + Calendar.MILLISECOND;
+		Calendar now = Calendar.getInstance();
+		filename = now.get(Calendar.YEAR) + "" + (now.get(Calendar.MONTH)+1) + "" + now.get(Calendar.DAY_OF_MONTH) + ""
+				+ now.get(Calendar.HOUR)  + "" + now.get(Calendar.MINUTE) + "" + now.get(Calendar.SECOND)
+				+ "" + now.get(Calendar.MILLISECOND);
 		String suffix = ".bmp";
 		File file = new File(directory,filename+suffix);
 		if(!file.exists()){

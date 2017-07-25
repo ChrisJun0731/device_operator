@@ -512,6 +512,7 @@ public class DeviceOperator {
                 break;
             }
         }
+        logger.info("截屏成功，文件存放路径"+file.getPath());
     }
 
     /**
