@@ -20,7 +20,7 @@ class TCPClient {
             this.socket = new Socket(device.getIP(), device.getPort());
         }
         catch(Exception e){
-            logger.error(e.getMessage());
+            logger.error("连接超时，请检测网络是否连通，以及设备ip和端口号是否设置正确！");
         }
     }
 
@@ -65,6 +65,7 @@ class TCPClient {
     public void close(){
         try{
             this.socket.close();
+            logger.info("成功与设备断开连接!");
         }
         catch(Exception e){
             logger.error(e.getMessage());

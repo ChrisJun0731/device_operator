@@ -52,6 +52,7 @@ public class Playlist {
 		String playlist_str = toPlayListString();
 		int i = 1;
 		File dir = new File(tempPlaylistPath);
+
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}

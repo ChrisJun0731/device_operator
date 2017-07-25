@@ -4,6 +4,7 @@ import com.genture.device_operator.playlist.params.BasicParam;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.util.Calendar;
 
 /**
  * Created by zhuj@genture.com on 2017/6/7.
@@ -260,7 +261,7 @@ public class DeviceOperator {
         byte[] data_frame = dataFrame.createDataFrame(0x0d, null);
         this.tcpClient.send(data_frame);
         byte[] result = this.tcpClient.receive();
-        if(result[4]==0x0e && result[5] == 1){
+        if(result[3]==0x0e && result[4] == 1){
             logger.info("重启设备成功！");
         }
         else{
@@ -594,6 +595,64 @@ public class DeviceOperator {
      */
     public void setCapturePath(String capturePath) {
         this.capturePath = capturePath;
+        logger.info("设置截屏文件的存放路径成功，新的存放路径为："+ capturePath);
+    }
+
+    /**
+     * 定时开关屏设置
+     * @param calendars 时间段中的对象。
+     *                  每个时间段包含两个Calendar对象。前一个Calendar对象表示开始时间，后面的表示结束时间
+     *                  每个时间段按顺序写在数组中。
+     *                  比如数组中第0个第1个元素表示第一个时间段，第2和第3个元素表示第二个时间段。以此类推
+     */
+    public void timeSwitchScreen(Calendar ...calendars){
+        byte[] data = util.convertCalendars2Data(calendars);
+        if(data == null){
+            return;
+        }
+        byte[] data_frame = dataFrame.createDataFrame(0x8a, data);
+        this.tcpClient.send(data_frame);
+        byte[] result = this.tcpClient.receive();
+        if(result[3] == (byte)0x8b){
+            if(result[4] == 1){
+                logger.info("定时开关屏设置成功!");
+            }
+            else{
+                logger.error("定时开关屏设置失败!");
+            }
+        }
+        else{
+            logger.error("设备未响应!");
+        }
+    }
+
+    /**
+     * 设置定时播放
+     * @param playNum 播放列表编号 范围1-100
+     * @param itemNum 节目编号 范围1-24
+     * @param calendars 时间段中的对象。
+     *                  每个时间段包含两个Calendar对象。前一个Calendar对象表示开始时间，后面的表示结束时间
+     *                  每个时间段按顺序写在数组中。
+     *                  比如数组中第0个第1个元素表示第一个时间段，第2和第3个元素表示第二个时间段。以此类推
+     */
+    public void timePlay(int playNum, int itemNum, Calendar ...calendars){
+        int len = calendars.length;
+        byte[] data = new byte[7*len+ 3];
+        byte[] time_data = util.convertCalendars2Data(calendars);
+        System.arraycopy(time_data, 0, data, 0, time_data.length);
+        data[data.length - 2] = (byte)playNum;
+        data[data.length - 1] = (byte)itemNum;
+        byte[] data_frame = dataFrame.createDataFrame(0x41, data);
+        this.tcpClient.send(data_frame);
+        byte[] result = this.tcpClient.receive();
+        if(result[3] == (byte)0x42){
+            if(result[4] == 1){
+                logger.info("设置定时播放成功!");
+            }
+            else{
+                logger.error("设置定时播放失败！");
+            }
+        }
     }
 
     /**

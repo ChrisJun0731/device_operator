@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.nio.charset.Charset;
+import java.util.Calendar;
 
 /**
  * Created by Administrator on 2017/6/13.
@@ -21,7 +22,8 @@ public class OperatorTest {
 //		Device device = new Device("192.168.50.225", 5000);
 //		Device device = new Device("192.168.30.123",5000);
 //		Device device = new Device("172.16.1.214", 5000);
-		Device device = new Device("192.168.50.2", 5000);
+//		Device device = new Device("192.168.50.2", 5000);
+		Device device = new Device("192.168.0.220", 5000);
 		this.deviceOperator = new DeviceOperator(device);
 	}
 
@@ -223,6 +225,32 @@ public class OperatorTest {
 		deviceOperator.playAssignedList(Integer.parseInt(num));
 		deviceOperator.disconnect();
 
+	}
+
+	//新增接口测试
+
+	//定时开关屏测试
+	@Test
+	public void timeSwitchScreenTest(){
+		Calendar start = Calendar.getInstance();
+		start.set(2017, 5, 25, 16, 05, 00);
+		Calendar end = Calendar.getInstance();
+		end.set(2017, 8, 28, 16, 55, 00);
+		Calendar[] calendars = {start, end};
+		deviceOperator.timeSwitchScreen(calendars);
+	}
+
+	//定时播放测试
+	@Test
+	public void timePlayTest(){
+		Calendar start = Calendar.getInstance();
+		start.set(2017, 06, 25, 14, 50);
+		Calendar end = Calendar.getInstance();
+		end.set(2017, 06, 25, 14, 55);
+		Calendar[] calendars = {start, end};
+		int playNum = 001;
+		int itemNum = 001;
+		deviceOperator.timePlay(playNum, itemNum, calendars);
 	}
 
 }

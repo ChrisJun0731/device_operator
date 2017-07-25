@@ -138,4 +138,40 @@ class Util {
 		}
 		return file;
 	}
+
+	/**
+	 * 将定时时间段转换为协议中字节流数据
+	 * @param calendars 时间段中对象
+	 */
+	public byte[] convertCalendars2Data(Calendar ...calendars){
+		if(calendars == null){
+			byte[] data = {0};
+			logger.info("将清除所有设置的时间段");
+			return data;
+		}
+		else{
+			int len = calendars.length;
+			byte[] data = new byte[7*len+1];
+			data[0] = (byte)(len/2);
+			int index = 1;
+			if(len%2 != 0){
+				logger.error("设置定时开关屏的参数个数不对，参数个数应为偶数个！");
+				data = null;
+			}
+			else{
+				for(int i=0; i<len; i++){
+					data[index++] = (byte)calendars[i].get(Calendar.DATE);
+					data[index++] = (byte)calendars[i].get(Calendar.MONTH);
+					byte[] year = new byte[2];
+					int2buf(calendars[i].get(Calendar.YEAR), year, 0);
+					data[index++] = year[0];
+					data[index++] = year[1];
+					data[index++] = (byte)calendars[i].get(Calendar.SECOND);
+					data[index++] = (byte)calendars[i].get(Calendar.MINUTE);
+					data[index++] = (byte)calendars[i].get(Calendar.HOUR);
+				}
+			}
+			return data;
+		}
+	}
 }
